@@ -14,7 +14,7 @@
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 		<c3p0Version>0.9.1.2</c3p0Version>
-		<hibernateVersion>4.3.5.Final</hibernateVersion>
+		<hibernateVersion>4.1.5.Final</hibernateVersion>
 		<mysqlVersion>5.1.38</mysqlVersion>
 	</properties>
   <dependencies>
@@ -138,11 +138,11 @@
 		</dependency>
 	
 		<!-- 数据库连接池-->
-	    <dependency>
+	    <!-- <dependency>
 	      <groupId>c3p0</groupId>
 	      <artifactId>c3p0</artifactId>
 	      <version>${c3p0Version}</version>
-	    </dependency>
+	    </dependency> -->
 	    
 		<!-- Test -->
 		<dependency>
@@ -158,7 +158,13 @@
 	      <artifactId>hibernate-core</artifactId>
 	      <version>${hibernateVersion}</version>
 	    </dependency>
-	
+	    
+		<dependency>
+	    	<groupId>org.hibernate</groupId>
+	    	<artifactId>hibernate-entitymanager</artifactId>
+	      <version>${hibernateVersion}</version>
+	    </dependency>
+	  
 	    <!-- hibernate 缓存, 视情况添加-->
 	    <dependency>
 	      <groupId>org.hibernate</groupId>
@@ -172,5 +178,40 @@
 	      <artifactId>mysql-connector-java</artifactId>
 	      <version>${mysqlVersion}</version>
 	    </dependency>
+	    
+	    <!-- 为了让Hibernate使用代理模式，需要javassist -->
+	    <dependency>
+	       <groupId>org.javassist</groupId>
+	       <artifactId>javassist</artifactId>
+	       <version>3.18.1-GA</version>
+	    </dependency>
+	    
+	    <dependency>
+	        <groupId>org.apache.tomcat</groupId>
+	        <artifactId>tomcat-dbcp</artifactId>
+	        <version>7.0.35</version>
+    	</dependency>
   </dependencies>
+  
+  <build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>2.6</version>
+            <configuration>
+                <failOnMissingWebXml>false</failOnMissingWebXml>
+            </configuration>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>2.3.2</version>
+            <configuration>
+            	<source>1.7</source>
+            	<target>1.7</target>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
 </project>
