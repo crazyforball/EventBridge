@@ -1,10 +1,10 @@
 package com.emsrepo.service;
 
-import com.emsrepo.entity.Users;
+import com.emsrepo.entity.User;
 
 public interface UserService {
 
-	public void addUser(Users user);
+	public void addUser(User user);
 	
-	public Users getUser(int uid);
+	public User getUser(int uid);
 }

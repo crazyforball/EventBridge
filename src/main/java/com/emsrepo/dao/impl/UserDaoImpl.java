@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.emsrepo.dao.UserDao;
-import com.emsrepo.entity.Users;
+import com.emsrepo.entity.User;
 
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -23,15 +23,21 @@ public class UserDaoImpl implements UserDao {
 	}
 	
 	@Override
-	public void addUser(Users user) {
+	public void addUser(User user) {
 		// TODO Auto-generated method stub
 		getSession().persist(user);
 	}
 	
 	@Override
-	public Users getUserById(int uid) {
+	public User getUserById(int uid) {
 		// TODO Auto-generated method stub
-		return (Users) getSession().get(Users.class, uid);
+		return (User) getSession().get(User.class, uid);
+	}
+
+	@Override
+	public User getUserByUsername(String username) {
+		// TODO Auto-generated method stub
+		return (User)getSession().get(User.class, username);
 	}
 
 }

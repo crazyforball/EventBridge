@@ -13,7 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.emsrepo.entity.Users;
+import com.emsrepo.entity.User;
 import com.emsrepo.service.UserService;
 
 /**
@@ -38,13 +38,30 @@ public class HomeController {
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		
-		Users u = userService.getUser(1);
+		User u = userService.getUser(1);
 		
 		String formattedDate = dateFormat.format(date);
 		
+		model.addAttribute("account", u.getEmail() );
 		model.addAttribute("serverTime", formattedDate );
-		model.addAttribute("account", u.getAccount());
 		return "home";
 	}
 	
+	@RequestMapping(value="/login", method=RequestMethod.GET)
+	public String toLogin(Model model) {
+		
+		return "login";
+	}
+	
+	@RequestMapping(value="/login_fail", method=RequestMethod.GET)
+	public String loginFail(Model model) {
+		
+		model.addAttribute("login_error", "username or password is incorrect, please re-enter!");
+		return "login";
+	}
+	
+	@RequestMapping(value="/login_success", method=RequestMethod.GET)
+	public String loginSuccess(Model model) {
+		return "home";
+	}
 }
