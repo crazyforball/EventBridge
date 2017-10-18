@@ -7,25 +7,26 @@
 	<body>
 		<p>Login Module</p>
 		
-			<label>Account: </label>
-			<input id="username" name="j_username" type="text"/><br/>
+			<label>Username: </label>
+			<input id="username" name="username" type="text"/><br/>
 			<label>Password: </label>
-			<input id="password" name="j_password" type="password"/><br/>
+			<input id="password" name="password" type="password"/><br/>
 			<input type="button" value="Sign In" onclick="doLogin()"/>
 			<div id="results"></div>
 	</body>
 	<script src="https://cdn.bootcss.com/jquery/3.2.0/jquery.min.js"></script>
 	<script type="text/javascript">
 		function doLogin(){
-			var url = "/ctosii_middle/j_spring_security_check";
-			var username = $("input[name='j_username']").val();
-			var password = $("input[name='j_password']").val();
+			var url = "/emsrepo/doLogin";
+			var username = $("input[name='username']").val();
+			var password = $("input[name='password']").val();
+			console.log("username="+username+" password="+password);
 			$.ajax({
 				url:url,
 				type:"POST",
-				data:"j_username="+username+"j_pasword="+password,
+				data:"username="+username+"&password="+password,
 				success:function(data){
-					$("#results").text(data);
+					console.log(data);
 				}
 			});
 		}

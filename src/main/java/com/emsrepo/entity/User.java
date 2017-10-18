@@ -7,6 +7,8 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="t_user")
 public class User implements Serializable {
@@ -58,10 +60,14 @@ public class User implements Serializable {
 	@Column(name="driverLicense")
 	private String driverLicense;
 
+	@Column(name="status")
+	private String status;
+	
 	@OneToMany(fetch=FetchType.EAGER, cascade = {CascadeType.ALL}, mappedBy="creator")
+	@JsonIgnore
 	private Set<Event> createdEvents = new HashSet<>();
 	
-	@ManyToMany(cascade = CascadeType.PERSIST, fetch=FetchType.LAZY)
+	@ManyToMany(cascade = CascadeType.PERSIST, fetch=FetchType.EAGER)
 	@JoinTable(name="t_booking",
 			joinColumns={@JoinColumn(name="uid", referencedColumnName="uid")},
 			inverseJoinColumns={@JoinColumn(name="eid", referencedColumnName="eid")})
@@ -161,6 +167,14 @@ public class User implements Serializable {
 
 	public void setDriverLicense(String driverLicense) {
 		this.driverLicense = driverLicense;
+	}	
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public Set<Event> getCreatedEvents() {
@@ -179,5 +193,8 @@ public class User implements Serializable {
 		this.bookingEvents = bookingEvents;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "uid:" + uid + " username:" + username + " utype:" + utype + " email:" + email + " phoneNum:" + phoneNum;
+	}
 }

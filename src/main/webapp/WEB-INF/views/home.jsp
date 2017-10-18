@@ -8,7 +8,6 @@
 <h1>
 	Hello world!  
 </h1>
-<P>	Account: ${account}</P>
 <P> The time on the server is ${serverTime}. </P>
 </body>
 </html>

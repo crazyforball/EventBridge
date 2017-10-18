@@ -2,8 +2,8 @@ package com.emsrepo.entity;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.Collection;
 import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="t_event")
@@ -32,20 +34,20 @@ public class Event implements Serializable {
 	@Column(name="eventname")
 	private String eventName;
 	
-	@Column(name="desc")
-	private String desc;
+	@Column(name="description")
+	private String description;
 	
 	@Column(name="location")
 	private String location;
 	
 	@Column(name="startdate")
-	private Date startDate;
+	private String startDate;
 	
 	@Column(name="enddate")
-	private Date endDate;
+	private String endDate;
 	
 	@Column(name="status")
-	private int status;
+	private String status;
 	
 	@Column(name="capacity")
 	private int capacity;
@@ -69,6 +71,7 @@ public class Event implements Serializable {
 	@JoinColumn(name="uid")
 	private User creator;
 
+	@JsonIgnore
 	@ManyToMany(mappedBy="bookingEvents")
 	private Set<User> bookingUsers;
 	
@@ -87,13 +90,13 @@ public class Event implements Serializable {
 	public void setEventName(String eventName) {
 		this.eventName = eventName;
 	}
-	
-	public String getDesc() {
-		return desc;
+
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getLocation() {
@@ -104,27 +107,27 @@ public class Event implements Serializable {
 		this.location = location;
 	}
 
-	public Date getStartDate() {
+	public String getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
 
-	public Date getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 
-	public int getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
@@ -183,6 +186,16 @@ public class Event implements Serializable {
 	public void setCreator(User creator) {
 		this.creator = creator;
 	}
+
+	public Set<User> getBookingUsers() {
+		return bookingUsers;
+	}
+
+	public void setBookingUsers(Set<User> bookingUsers) {
+		this.bookingUsers = bookingUsers;
+	}
+
+	
 	
 	
 }

@@ -1,6 +1,9 @@
 package com.emsrepo.dao;
 
+import java.util.List;
+
 import com.emsrepo.entity.User;
+import com.emsrepo.vo.UserVO;
 
 public interface UserDao {
 
@@ -23,4 +26,12 @@ public interface UserDao {
 	 * @return
 	 */
 	public User getUserByUsername(String username);
+	
+	public List<User> getAllUserList();
+	
+	public List<User> getGeneralUserList();
+	
+	public void updateUser(User u);
+
+	void batchUpdateUserStatus(List<Integer> uidList, String status);
 }
