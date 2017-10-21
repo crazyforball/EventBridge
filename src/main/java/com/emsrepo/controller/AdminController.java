@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.emsrepo.entity.Logger;
 import com.emsrepo.service.EventService;
+import com.emsrepo.service.LoggerService;
 import com.emsrepo.service.UserService;
 import com.emsrepo.vo.EventVO;
 import com.emsrepo.vo.MsgVO;
@@ -35,6 +37,10 @@ public class AdminController {
 	@Autowired
 	@Qualifier("eventService")
 	private EventService eventService;
+	
+	@Autowired
+	@Qualifier("loggerService")
+	private LoggerService loggerService;
 	
 	@RequestMapping("/admin")
 	public String toAdmin(Model model) {
@@ -213,6 +219,21 @@ public class AdminController {
 		
 		String json="";
 		json = mapper.writeValueAsString(msg);
+		return json;
+	}
+	
+	@RequestMapping("/admin/log-list")
+	public String toLogList(Model model) {
+		return "log-list";
+	}
+	
+	@RequestMapping(value="/admin/getLogList", method=RequestMethod.GET)
+	@ResponseBody
+	public String getLogList() throws Exception {
+		List<Logger> logList = loggerService.getLoggerDetailList();
+		ObjectMapper mapper = new ObjectMapper();
+		String json = "";
+		json = mapper.writeValueAsString(logList);
 		return json;
 	}
 }

@@ -1,6 +1,7 @@
 package com.emsrepo.utils;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 public class CollectionUtils {
@@ -40,4 +41,24 @@ public class CollectionUtils {
      * @return whether the given Map is empty
      */
     public static boolean isNotEmpty(Map<?, ?> map) { return !isEmpty(map); }
+    
+    /**
+     * 
+     * @param String
+     * @param list
+     * @return
+     */
+    public static String convertListToString(List<Integer> list) {
+		String str = "";
+		if (list != null) {
+			for (Integer id : list) {
+				if (!"".equals(str)) {
+					str += "/" + id;
+				} else {
+					str += id;
+				}
+			}
+		}
+    	return str;
+    }
 }

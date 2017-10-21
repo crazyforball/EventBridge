@@ -8,9 +8,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.emsrepo.dao.EventDao;
+import com.emsrepo.dao.LoggerDao;
 import com.emsrepo.entity.Event;
+import com.emsrepo.entity.Logger;
+import com.emsrepo.enums.LogTypeEnum;
 import com.emsrepo.service.EventService;
 import com.emsrepo.utils.CollectionUtils;
+import com.emsrepo.utils.DateTimeUtil;
 import com.emsrepo.vo.EventVO;
 
 @Service("eventService")
@@ -18,6 +22,9 @@ public class EventServiceImpl implements EventService {
 
 	@Autowired
 	private EventDao eventDao;
+	
+	@Autowired
+	private LoggerDao loggerDao;
 	
 	@Override
 	@Transactional
@@ -42,6 +49,7 @@ public class EventServiceImpl implements EventService {
 	@Transactional
 	public void batchUpdateEventStatus(List<Integer> eidList, String status) {
 		eventDao.batchUpdateEventStatus(eidList, status);
+		addLog(eidList, status, 5);
 	}
 
 	public EventVO convertToEventVO(Event event) {
@@ -60,5 +68,14 @@ public class EventServiceImpl implements EventService {
 		vo.setVacancy(event.getVacancy());
 		vo.setLocation(event.getLocation());
 		return vo;
+	}
+	
+	public void addLog(List<Integer> eidList, String status, int adminId) {
+		Logger log = new Logger();
+		log.setAdminId(adminId);
+		log.setEid(CollectionUtils.convertListToString(eidList));
+		log.setLogType(status + " " + LogTypeEnum.OPT_EVENT);
+		log.setLogDate(DateTimeUtil.getNowadayMillsTime());
+		loggerDao.addLog(log);
 	}
 }

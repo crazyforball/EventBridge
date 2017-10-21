@@ -43,6 +43,15 @@
                     <li><a href="${pageContext.request.contextPath}/admin/event-mgmt">Event Management</a></li>
                 </ul>
             </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    Operation Log
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="${pageContext.request.contextPath}/admin/log-list">Log List</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
     </div>

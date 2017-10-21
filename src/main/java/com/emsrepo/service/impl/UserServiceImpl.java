@@ -7,10 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.emsrepo.dao.LoggerDao;
 import com.emsrepo.dao.UserDao;
+import com.emsrepo.entity.Logger;
 import com.emsrepo.entity.User;
+import com.emsrepo.enums.LogTypeEnum;
 import com.emsrepo.enums.UserTypeEnum;
 import com.emsrepo.service.UserService;
+import com.emsrepo.utils.CollectionUtils;
+import com.emsrepo.utils.DateTimeUtil;
 import com.emsrepo.vo.UserVO;
 
 @Service("userService")
@@ -18,6 +23,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	private LoggerDao loggerDao;
 	
 	@Override
 	public void addUser(User user) {
@@ -91,6 +99,7 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public void batchUpdateUserStatus(List<Integer> uidList, String status) {
 		userDao.batchUpdateUserStatus(uidList, status);
+		addLog(uidList, status, 5);
 	}
 
 	@Override
@@ -107,5 +116,14 @@ public class UserServiceImpl implements UserService {
 			return userVOList;
 		}
 		return null;
+	}
+	
+	public void addLog(List<Integer> uidList, String status, int adminId) {
+		Logger log = new Logger();
+		log.setAdminId(adminId);
+		log.setUid(CollectionUtils.convertListToString(uidList));
+		log.setLogType(status + " " + LogTypeEnum.OPT_USER);
+		log.setLogDate(DateTimeUtil.getNowadayMillsTime());
+		loggerDao.addLog(log);
 	}
 }

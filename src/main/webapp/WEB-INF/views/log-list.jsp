@@ -5,6 +5,7 @@
 	<title>My Admin Center</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
 </head>
 <body>
 <nav class="navbar navbar-default" role="navigation">
@@ -47,58 +48,63 @@
 </nav>
 
 <div class="container" align="center">
-	<div id="welcome-pannel" align="left">
-		<h3 id="welcome-heading"></h3>
+	<div align="left">
+	
 	</div>
-	<div id="info-pannel">
-		<table border="1">
+	</br>
+	<table id="table_id" class="table table-bordered table-hover table-striped">
+		<thead>
 			<tr>
-				<td>User ID: </td>
-				<td id="t-uid"></td>
+				<th>Log ID</th>
+	            <th>Administrator ID</th>
+				<th>Log Type</th>
+				<th>User ID</th>
+				<th>Event ID</th>
+				<th>Log Date</th>
 			</tr>
-			<tr>
-				<td>Account: </td>
-				<td id="t-username"></td>
-			</tr>
-			<tr>
-				<td>Full Name: </td>
-				<td id="t-fullname"></td>
-			</tr>
-			<tr>
-				<td>User Type: </td>
-				<td id="t-utype"></td>
-			</tr>
-		</table>
-	</div>
+		</thead>
+		<tbody></tbody>
+	</table>
 </div>
-
 </body>
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		var url = "${pageContext.request.contextPath}/admin/5";
-		$.ajax({
-			url:url,
-			type:"GET",
-			success: function(data) {
-				var ddd = $.parseJSON(data);
-				var user_type;
-				if (typeof(ddd) == 'undefined') {
-					alert("Invalid Operation!");
-					windows.history.back(-1);
+		
+		var idArray = [];
+		var table = $("#table_id").DataTable({
+			"responsive":true,
+			"processing":true,
+			/* "serverSide":true, */
+			"ajax":{
+				"url":"${pageContext.request.contextPath}/admin/getLogList",
+				"dataSrc": function(data) {
+					if (data == null) {
+						return "";
+					} else {
+						return data;
+					}
+				},
+				"error": function(XMLHttpRequest, textStatus, errorThrown) {
+					console.log("p1: " + textStatus);
+					alert("Network issues!");
 				}
-				/* alert(data); */
-				$("#welcome-heading").text("Welcome, " + ddd.username);
-				$("#t-uid").text(ddd.uid);
-				$("#t-username").text(ddd.username);
-				$("#t-fullname").text(ddd.firstName + " " + ddd.lastName);
-				if (ddd.utype == 3) {
-					user_type="Administrator";
-				}
-				$("#t-utype").text(user_type);
-			}
+			},
+			"columns":[
+			           {"data":"logid"},
+			           {"data":"adminId"},
+			           {"data":"logType"},
+			           {"data":"uid"},
+			           {"data":"eid"},
+			           {"data":"logDate"}
+			           ],
+			"ellipsis": 'popover',
+			"order":[[0,'desc']],
+			"displayLength":50
 		});
+		
 	});
 </script>
 </html>
