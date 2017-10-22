@@ -26,7 +26,6 @@ import com.emsrepo.bean.UserToken;
 import com.emsrepo.entity.User;
 import com.emsrepo.service.UserService;
 import com.emsrepo.utils.DateTimeUtil;
-import com.emsrepo.utils.EncodeUtil;
 import com.emsrepo.utils.MapResultUtil;
 
 /**

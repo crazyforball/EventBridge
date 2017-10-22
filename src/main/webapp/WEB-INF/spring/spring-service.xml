@@ -6,7 +6,7 @@
        xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd
-       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd" default-autowire="byName">
 		
 	<bean id="userService" class="com.emsrepo.service.impl.UserServiceImpl" />
 	<bean id="eventService" class="com.emsrepo.service.impl.EventServiceImpl" />

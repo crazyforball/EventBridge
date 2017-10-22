@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
 import com.emsrepo.dao.UserDao;
 import com.emsrepo.entity.User;
 
-@Repository
+@Repository("userDao")
 public class UserDaoImpl implements UserDao {
 	
 	@Autowired

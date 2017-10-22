@@ -19,6 +19,7 @@ import com.emsrepo.utils.DateTimeUtil;
 import com.emsrepo.vo.UserVO;
 
 @Service("userService")
+@Transactional
 public class UserServiceImpl implements UserService {
 
 	@Autowired
