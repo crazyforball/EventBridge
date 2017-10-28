@@ -2,6 +2,7 @@ package com.emsrepo.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,8 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.emsrepo.dao.LoggerDao;
 import com.emsrepo.dao.UserDao;
-import com.emsrepo.entity.Logger;
-import com.emsrepo.entity.User;
+import com.emsrepo.domain.Logger;
+import com.emsrepo.domain.User;
 import com.emsrepo.enums.LogTypeEnum;
 import com.emsrepo.enums.UserTypeEnum;
 import com.emsrepo.service.UserService;
@@ -127,4 +128,45 @@ public class UserServiceImpl implements UserService {
 		log.setLogDate(DateTimeUtil.getNowadayMillsTime());
 		loggerDao.addLog(log);
 	}
+	
+	//++++++++++++++++++++++++++
+	@Override
+	public boolean registerUser(User user) {
+
+		// Step 1: check whether this person is already in the database
+		// Step 2: if not, save this person into the database
+		if (!isExistingUser(user)) {
+			userDao.saveUser(user);
+			return true;
+		}
+		System.out.println("username already exits.");
+		return false;
+	}
+
+	@Override
+	public boolean loginUser(String username, String password) {
+		User user = userDao.getUser(username);
+		if (user != null) {
+			return user.getPassword().equals(password);
+		}
+		return false;
+	}
+
+	@Override
+	public User getUser(String username) {
+		return userDao.getUser(username);
+	}
+
+	@Override
+	public boolean isExistingUser(User user) {
+		return userDao.getUser(user.getUsername()) != null;
+	}
+
+	@Override
+	public boolean updateUser(User user, Map<String, String> userInfo) {
+		return userDao.updateUser(user, userInfo);
+	}
+	
+	
+
 }

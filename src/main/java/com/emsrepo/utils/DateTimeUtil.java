@@ -21,4 +21,12 @@ public class DateTimeUtil {
 		return sdf.format(finalDate);
 	}
 	
+	//+++++++++++++++
+	public static String toYMD(String date) {
+		return date.substring(0, date.indexOf(" "));
+	}
+
+	public static String toYMDHMS(String date) {
+		return date.substring(0, date.indexOf("."));
+	}
 }

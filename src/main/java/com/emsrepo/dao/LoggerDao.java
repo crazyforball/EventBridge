@@ -2,7 +2,7 @@ package com.emsrepo.dao;
 
 import java.util.List;
 
-import com.emsrepo.entity.Logger;
+import com.emsrepo.domain.Logger;
 
 public interface LoggerDao {
 

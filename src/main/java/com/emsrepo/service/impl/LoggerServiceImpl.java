@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import com.emsrepo.dao.LoggerDao;
-import com.emsrepo.entity.Logger;
+import com.emsrepo.domain.Logger;
 import com.emsrepo.service.LoggerService;
 
 @Service("loggerService")

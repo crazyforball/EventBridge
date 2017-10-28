@@ -9,8 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.emsrepo.dao.EventDao;
 import com.emsrepo.dao.LoggerDao;
-import com.emsrepo.entity.Event;
-import com.emsrepo.entity.Logger;
+import com.emsrepo.domain.Event;
+import com.emsrepo.domain.Logger;
+import com.emsrepo.domain.User;
 import com.emsrepo.enums.LogTypeEnum;
 import com.emsrepo.service.EventService;
 import com.emsrepo.utils.CollectionUtils;
@@ -22,14 +23,14 @@ public class EventServiceImpl implements EventService {
 
 	@Autowired
 	private EventDao eventDao;
-	
+
 	@Autowired
 	private LoggerDao loggerDao;
-	
+
 	@Override
 	@Transactional
 	public List<EventVO> getAllEventList() throws Exception {
-		
+
 		List<EventVO> voList = new ArrayList<>();
 		List<Event> eventList = new ArrayList<>();
 		eventList = eventDao.getAllEventList();
@@ -41,7 +42,7 @@ public class EventServiceImpl implements EventService {
 				}
 			}
 		}
-		
+
 		return voList;
 	}
 
@@ -65,11 +66,10 @@ public class EventServiceImpl implements EventService {
 		vo.setFee(event.getFees());
 		vo.setCategory(event.getCategory());
 		vo.setCreator(event.getCreator());
-		vo.setVacancy(event.getVacancy());
 		vo.setLocation(event.getLocation());
 		return vo;
 	}
-	
+
 	public void addLog(List<Integer> eidList, String status, int adminId) {
 		Logger log = new Logger();
 		log.setAdminId(adminId);
@@ -78,4 +78,55 @@ public class EventServiceImpl implements EventService {
 		log.setLogDate(DateTimeUtil.getNowadayMillsTime());
 		loggerDao.addLog(log);
 	}
+	
+	//+++++++++++++++++++
+	@Override
+	public boolean postEvent(Event event) {
+
+		// Step 1: check whether this person is already in the database
+		// Step 2: if not, save this person into the database
+		if (!isExistingEvent(event)) {
+			System.out.println("=====>" + "in post service");
+			eventDao.saveEvent(event);
+			return true;
+		}
+		System.out.println("eventName already exits.");
+		return false;
+	}
+	
+	@Override
+	public boolean isExistingEvent(Event event) {
+		return eventDao.getEvent(event.getEid()) != null;
+	}
+	
+//	@Override
+//	public Event retrieveEvent(User creator, String eventName) {
+//		return eventDao.getEvent(creator, eventName);
+//	}
+
+	@Override
+	public Event retrieveEvent(int eventId) {
+		return eventDao.getEvent(eventId);
+	}
+	
+	@Override
+	public List<Event> retrieveEventsByCategory(String category) {
+		return eventDao.getEventsByCategory(category);
+	}
+
+	@Override
+	public List<Event> retrieveLatestNEvents(int n) {
+		return eventDao.getLatestNEvents(n);
+	}
+
+	@Override
+	public void deleteEvent(Event event) {
+		eventDao.deleteEvent(event);
+	}
+
+	@Override
+	public void updateEvent(Event oldEvent, Event newEvent) {
+		eventDao.updateEvent(oldEvent, newEvent);
+	}
+
 }

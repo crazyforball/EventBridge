@@ -1,5 +1,5 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%@ include file="/WEB-INF/views/include.jsp" %>
+
 <html>
 <head>
 	<title>My Admin Center</title>
@@ -11,17 +11,26 @@
 <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
     <div class="navbar-header">
-        <a class="navbar-brand" href="#">Administration Management Center</a>
+        <a class="navbar-brand" href="./admin?adminName=${user.username}">Admin Center</a>
     </div>
     <div>
         <ul class="nav navbar-nav">
+        	<li class="dropdown">
+            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    Account
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                	<li><a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_account.path"/>">My Account Home</a></li>
+                </ul>
+            </li>
             <li class="dropdown">
             	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     User Censorship
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                	<li><a href="${pageContext.request.contextPath}/admin/user-mgmt">User Management</a></li>
+                	<li><a href="${pageContext.request.contextPath}/admin/user-mgmt?adminName=${user.username}">User Management</a></li>
                 </ul>
             </li>
             <li class="dropdown">
@@ -30,7 +39,7 @@
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="${pageContext.request.contextPath}/admin/event-mgmt">Event Management</a></li>
+                    <li><a href="${pageContext.request.contextPath}/admin/event-mgmt?adminName=${user.username}">Event Management</a></li>
                 </ul>
             </li>
             <li class="dropdown">
@@ -39,7 +48,16 @@
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="${pageContext.request.contextPath}/admin/log-list">Log List</a></li>
+                    <li><a href="${pageContext.request.contextPath}/admin/log-list?adminName=${user.username}">Log List</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    Category List
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                	<li><a href="${pageContext.request.contextPath}/category/home?adminName=${user.username}">Category Management</a></li>
                 </ul>
             </li>
         </ul>

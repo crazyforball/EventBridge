@@ -1,8 +1,5 @@
 package com.emsrepo.dao.impl;
 
-import com.emsrepo.entity.Event;
-import com.emsrepo.entity.Logger;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +9,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.emsrepo.dao.LoggerDao;
+import com.emsrepo.domain.Event;
+import com.emsrepo.domain.Logger;
 
 @Repository
 public class LoggerDaoImpl implements LoggerDao {

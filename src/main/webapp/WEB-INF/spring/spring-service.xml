@@ -10,6 +10,8 @@
 		
 	<bean id="userService" class="com.emsrepo.service.impl.UserServiceImpl" />
 	<bean id="eventService" class="com.emsrepo.service.impl.EventServiceImpl" />
+	<bean id="categoryService" class="com.emsrepo.service.impl.CategoryServiceImpl" />
+	<bean id="bookingService" class="com.emsrepo.service.impl.BookingServiceImpl" />
 	<bean id="loggerService" class="com.emsrepo.service.impl.LoggerServiceImpl" />
 </beans>
 		
