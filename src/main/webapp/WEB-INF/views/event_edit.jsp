@@ -44,6 +44,7 @@
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_account.path"/>">My Account Home</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_bookings.path"/>?username=${user.username}">My Bookings</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_posts.path"/>?username=${user.username}">My Posts</a>
+				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_post_event.path"/>">Post an Event</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_logout.path"/>">Log out</a>
 				            </div>
          				 </li>
@@ -51,7 +52,7 @@
 					<c:otherwise>
 							<!-- <li class="nav-item active"> -->
 							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_home.path"/>">Home <span class="sr-only">(current)</span></a></li>
-							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_signup.path"/>">Sign Up</a></li>
+							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_signup.path"/>">Sign up</a></li>
 							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_login.path"/>">Log in</a></li>
 							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_contact.path"/>">Contact</a></li>
 					</c:otherwise>
@@ -62,7 +63,6 @@
 					aria-label="Search" name="keyword"> 
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 			</form>
-			<a class="nav-link" href="<fmt:message key="nav_advanced_search.path"/>">Advanced Search</a>
 		</div>
 	</nav>
 
@@ -73,37 +73,38 @@
 			<form:form method="post" commandName="newEvent" action="event/edit?eventId=${oldEvent.eid}">
 				<table align="center">
 					<tr>
-						<td colspan="2" align="center"><h2><fmt:message key="event_edit.heading"/></h2></td>
+						<td></td>
+						<td><h2><fmt:message key="event_edit.heading"/></h2></td>
 					</tr>
-					<tr>
-						<td>Event name:</td>
-						<td><form:input path="eventName" required="true" value="${oldEvent.eventName}"/></td>
+					<tr class="event-post-info">
+						<td width="300px">Event name:</td>
+						<td><form:input path="eventName" required="true" value="${oldEvent.eventName}" size="25"/></td>
 					</tr>
 					<tr hidden="true">
 						<td >Event organizer:</td>
 						<td ><form:input path="creator.username" required="true" value="${oldEvent.creator.username}"/></td>
 					</tr>
-					<tr>
+					<tr class="event-post-info">
 						<td>Location:</td>
-						<td><form:input path="location" required="true" value="${oldEvent.location}"/></td>
+						<td><form:input path="location" required="true" value="${oldEvent.location}" size="25"/></td>
 					</tr>
-					<tr>
+					<tr class="event-post-info">
 						<td>Start Date (YYYY-MM-DD hh:mm):</td>
-						<td><form:input path="startDate" required="true" value="${oldEvent.startDate}"/></td>
+						<td><form:input path="startDate" required="true" value="${oldEvent.startDate}" size="25"/></td>
 					</tr>
-					<tr>
+					<tr class="event-post-info">
 						<td>End Date (YYYY-MM-DD hh:mm):</td>
-						<td><form:input path="endDate" required="true" value="${oldEvent.endDate}"/></td>
+						<td><form:input path="endDate" required="true" value="${oldEvent.endDate}" size="25"/></td>
 					</tr>
-					<tr>
+					<tr class="event-post-info">
 						<td>Capacity:</td>
-						<td><form:input path="capacity" required="true" value="${oldEvent.capacity}"/></td>
+						<td><form:input path="capacity" required="true" value="${oldEvent.capacity}" size="10"/></td>
 					</tr>
-					<tr>
+					<tr class="event-post-info">
 						<td>Fees ($AUD):</td>
-						<td><form:input path="fees" required="true" value="${oldEvent.fees}"/></td>
+						<td><form:input path="fees" required="true" value="${oldEvent.fees}" size="10"/></td>
 					</tr>
-					<tr>
+					<tr class="event-post-info">
 						<td>Category:</td>
 						<td><form:select path="category">
 								<form:option value="${oldEvent.category}"/>
@@ -111,11 +112,11 @@
 							</form:select>
 						</td>
 					</tr>
-					<tr>
+					<tr class="event-post-info">
 						<td>Description:</td>
-						<td><form:textarea path="description"/></td>
+						<td><form:textarea path="description" rows="5" cols="50"/></td>
 					</tr>
-					<tr>
+					<tr class="event-post-info">
 						<td></td>
 						<td>
 							<button type="submit" >Update</button>

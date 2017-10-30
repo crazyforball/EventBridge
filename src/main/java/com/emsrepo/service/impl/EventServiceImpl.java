@@ -1,6 +1,7 @@
 package com.emsrepo.service.impl;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,6 @@ import com.emsrepo.dao.EventDao;
 import com.emsrepo.dao.LoggerDao;
 import com.emsrepo.domain.Event;
 import com.emsrepo.domain.Logger;
-import com.emsrepo.domain.User;
 import com.emsrepo.enums.LogTypeEnum;
 import com.emsrepo.service.EventService;
 import com.emsrepo.utils.CollectionUtils;
@@ -78,8 +78,8 @@ public class EventServiceImpl implements EventService {
 		log.setLogDate(DateTimeUtil.getNowadayMillsTime());
 		loggerDao.addLog(log);
 	}
-	
-	//+++++++++++++++++++
+
+	// +++++++++++++++++++
 	@Override
 	public boolean postEvent(Event event) {
 
@@ -93,22 +93,22 @@ public class EventServiceImpl implements EventService {
 		System.out.println("eventName already exits.");
 		return false;
 	}
-	
+
 	@Override
 	public boolean isExistingEvent(Event event) {
 		return eventDao.getEvent(event.getEid()) != null;
 	}
-	
-//	@Override
-//	public Event retrieveEvent(User creator, String eventName) {
-//		return eventDao.getEvent(creator, eventName);
-//	}
+
+	// @Override
+	// public Event retrieveEvent(User creator, String eventName) {
+	// return eventDao.getEvent(creator, eventName);
+	// }
 
 	@Override
 	public Event retrieveEvent(int eventId) {
 		return eventDao.getEvent(eventId);
 	}
-	
+
 	@Override
 	public List<Event> retrieveEventsByCategory(String category) {
 		return eventDao.getEventsByCategory(category);
@@ -127,6 +127,19 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public void updateEvent(Event oldEvent, Event newEvent) {
 		eventDao.updateEvent(oldEvent, newEvent);
+	}
+
+	@Override
+	public List<EventVO> retrieveEventsByKeyword(String keyword) throws Exception {
+		List<EventVO> result = new ArrayList<EventVO>();
+		List<EventVO> list = getAllEventList();
+		for (Iterator<EventVO> iterator=list.iterator(); iterator.hasNext();) {
+			EventVO e = iterator.next();
+			if (e.getEventName().contains(keyword) || e.getLocation().contains(keyword)) {
+				result.add(e);
+			}
+		}
+		return result;
 	}
 
 }

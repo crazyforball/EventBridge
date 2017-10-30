@@ -44,6 +44,7 @@
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_account.path"/>">My Account Home</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_bookings.path"/>?username=${user.username}">My Bookings</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_posts.path"/>?username=${user.username}">My Posts</a>
+				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_post_event.path"/>">Post an Event</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_logout.path"/>">Log out</a>
 				            </div>
          				 </li>
@@ -51,7 +52,7 @@
 					<c:otherwise>
 							<!-- <li class="nav-item active"> -->
 							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_home.path"/>">Home <span class="sr-only">(current)</span></a></li>
-							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_signup.path"/>">Sign Up</a></li>
+							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_signup.path"/>">Sign up</a></li>
 							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_login.path"/>">Log in</a></li>
 							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_contact.path"/>">Contact</a></li>
 					</c:otherwise>
@@ -62,7 +63,6 @@
 					aria-label="Search" name="keyword"> 
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 			</form>
-			<a class="nav-link" href="<fmt:message key="nav_advanced_search.path"/>">Advanced Search</a>
 		</div>
 	</nav>
 
@@ -73,33 +73,39 @@
 			<form method="post" action="account/update?username=${user.username}">
 				<table border="0" align="center">
 					<tr>
-						<td colspan="2" align="center"><h2>Update Account</h2></td>
+						<td></td>
+						<td align="center"><h3>Update Account</h3></td>
 					</tr>
-						<td>Password:</td>
-						<td><input type="password" name="password" ></td>
+					<tr class="user-info">
+						<td width="150px">Password:</td>
+						<td><input type="password" name="password" required size="25"></td>
 					</tr>
-					<tr>
+					<tr class="user-info">
 						<td>New Password:</td>
-						<td><input type="password" name="newPassword1"></td>
+						<td><input type="password" name="newPassword1" required size="25"></td>
 					</tr>
-					<tr>
+					<tr class="user-info">
 						<td>Confirm Password:</td>
-						<td><input type="password" name="newPassword2"></td>
+						<td><input type="password" name="newPassword2" required size="25"></td>
 					</tr>
-					<tr>
+					<tr class="user-info">
 						<td>Phone:</td>
-						<td><input type="tel" name="phone"></td>
+						<td><input type="tel" name="phone" required size="25"></td>
 					</tr>
-					<tr>
+					<tr class="user-info">
 						<td>Email:</td>
-						<td><input type="email" name="email"></td>
+						<td><input type="email" name="email" required size="25"></td>
 					</tr>
-					<tr>
+					<tr height="10px">
+					</tr>
+					<tr class="user-info">
 						<td></td>
 						<td>
-							<button type="submit" >Save</button>
+							<button type="submit" >&nbspSave&nbsp</button>
 							<button type="reset" >Cancel</button>
 						</td>
+					</tr>
+					<tr height="30px">
 					</tr>
 				</table>
 			</form>

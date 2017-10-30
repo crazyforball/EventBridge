@@ -22,6 +22,10 @@ public class DateTimeUtil {
 	}
 	
 	//+++++++++++++++
+	public static String getNowadayTime() {
+		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+	}
+	
 	public static String toYMD(String date) {
 		return date.substring(0, date.indexOf(" "));
 	}

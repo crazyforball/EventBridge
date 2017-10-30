@@ -11,13 +11,16 @@
 <meta name="author" content="">
 <link rel="icon" href="http://getbootstrap.com/favicon.ico">
 
-<title>Booking Success</title>
+<title>Contact</title>
 
 <!-- Bootstrap core CSS -->
 <link href="<fmt:message key="css_js.path"/>/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
 <link href="<fmt:message key="css_js.path"/>/css/jumbotron.css" rel="stylesheet">
+<link rel="stylesheet" href="<fmt:message key="css_js.path"/>/css/style.css" media="screen" type="text/css">
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
 
 </head>
 
@@ -44,6 +47,7 @@
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_account.path"/>">My Account Home</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_bookings.path"/>?username=${user.username}">My Bookings</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_posts.path"/>?username=${user.username}">My Posts</a>
+				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_post_event.path"/>">Post an Event</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_logout.path"/>">Log out</a>
 				            </div>
          				 </li>
@@ -51,7 +55,7 @@
 					<c:otherwise>
 							<!-- <li class="nav-item active"> -->
 							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_home.path"/>">Home <span class="sr-only">(current)</span></a></li>
-							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_signup.path"/>">Sign Up</a></li>
+							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_signup.path"/>">Sign up</a></li>
 							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_login.path"/>">Log in</a></li>
 							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_contact.path"/>">Contact</a></li>
 					</c:otherwise>
@@ -62,7 +66,6 @@
 					aria-label="Search" name="keyword"> 
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 			</form>
-			<a class="nav-link" href="<fmt:message key="nav_advanced_search.path"/>">Advanced Search</a>
 		</div>
 	</nav>
 
@@ -70,20 +73,37 @@
 	<div class="jumbotron">
 		<div class="container">
 			<div align="center">
-		        <table>
-		            <tr>
-		                <td colspan="2" align="center"><h2>Cancel Booking Successfully!</h2></td>
-		            </tr>
-		            <tr>
-          				<td><a href="./account/home">Go to My Account Home.</a>
-          			</tr>
-		          	<tr>
-		          		<td><a href="./">Go to Event Bridge Home.</a>
-		          	</tr>
-		        </table>
-		    </div>
+				<table align="center">
+					<tr height="30px">
+						<td colspan="2" align="center"><h2>Contact Details</h2></td>
+					</tr>
+					<tr height="30px"></tr>
+					<tr height="30px">
+						<td width="150px">Company name:</td>
+						<td>Event Bridge Inc.</td>
+					</tr>
+					<tr height="30px">
+						<td>Phone:</td>
+						<td>8888 8888</td>
+					</tr>
+					<tr height="30px">
+						<td>Email:</td>
+						<td>event_bridge@gmail.com</td>
+					</tr>
+					<tr height="30px">
+						<td>Address:</td>
+						<td>Sydney, NSW, Australia</td>
+					</tr>
+					<tr height="30px">
+						<td>Postcode:</td>
+						<td>2000</td>
+					</tr>
+					<tr height="30px"></tr>
+				</table>
+			</div>
 		</div>    
     </div>
+
 	<!-- /container -->
 
 
@@ -99,6 +119,9 @@
 	<script src="<fmt:message key="css_js.path"/>/js/bootstrap.min.js"></script>
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 	<script src="<fmt:message key="css_js.path"/>/js/ie10-viewport-bug-workaround.js"></script>
-
+	
+	<script type="text/javascript" src="<fmt:message key="css_js.path"/>/js/jquery.js"></script>
+	<script type="text/javascript" src="<fmt:message key="css_js.path"/>/js/index.js"></script>
+	<script src='http://codepen.io/assets/libs/fullpage/jquery.js'></script>
 </body>
 </html>

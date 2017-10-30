@@ -44,6 +44,7 @@
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_account.path"/>">My Account Home</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_bookings.path"/>?username=${user.username}">My Bookings</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_posts.path"/>?username=${user.username}">My Posts</a>
+				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_post_event.path"/>">Post an Event</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_logout.path"/>">Log out</a>
 				            </div>
          				 </li>
@@ -51,7 +52,7 @@
 					<c:otherwise>
 							<!-- <li class="nav-item active"> -->
 							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_home.path"/>">Home <span class="sr-only">(current)</span></a></li>
-							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_signup.path"/>">Sign Up</a></li>
+							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_signup.path"/>">Sign up</a></li>
 							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_login.path"/>">Log in</a></li>
 							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_contact.path"/>">Contact</a></li>
 					</c:otherwise>
@@ -62,7 +63,6 @@
 					aria-label="Search" name="keyword"> 
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 			</form>
-			<a class="nav-link" href="<fmt:message key="nav_advanced_search.path"/>">Advanced Search</a>
 		</div>
 	</nav>
 
@@ -73,28 +73,34 @@
 			<form action="account/login" method="post">
 				<table align="center">
 					<tr>
-						<td colspan="2" align="center"><h2><fmt:message key="user_login.heading"/></h2></td>
+						<td></td>
+						<td align="center"><h2><fmt:message key="user_login.heading"/></h2></td>
 					</tr>
-					<tr>
-						<td>Username:</td>
-						<td><input type="text" name="username" required/></td>
+					<tr height="30px">
 					</tr>
-					<tr>
+					<tr class="user-info">
+						<td width="100px">Username:</td>
+						<td><input type="text" name="username" required size="25"/></td>
+					</tr>
+					<tr class="user-info">
 						<td>Password:</td>
-						<td><input type="password" name="password" required/></td>
+						<td><input type="password" name="password" required size="25"/></td>
 					</tr>
-					<tr><td></td></tr>
-					<tr>
+					<tr height="10px"></tr>
+					<tr class="user-info">
 						<td></td>
 						<td align="center"><button type="submit" >Log in </button></td>
 					</tr>
+					<tr class="user-info">
 						<td></td>
-						<td><a href="./reset_password">Forget your password?</a></td>
-					<tr>
+						<td align="center"><a href="./reset_password">Forget your password?</a></td>
 					</tr>
+					<tr class="user-info">
 						<td></td>
-						<td><a href="./account/register">Don't have an account?</a></td>
+						<td align="center"><a href="./account/register">Don't have an account?</a></td>
 					<tr>
+					<tr height="30px">
+					</tr>
 				</table>
 			</form>
 		</div>

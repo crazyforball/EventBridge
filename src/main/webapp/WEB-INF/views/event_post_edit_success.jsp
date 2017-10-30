@@ -44,6 +44,7 @@
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_account.path"/>">My Account Home</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_bookings.path"/>?username=${user.username}">My Bookings</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_posts.path"/>?username=${user.username}">My Posts</a>
+				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_post_event.path"/>">Post an Event</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_logout.path"/>">Log out</a>
 				            </div>
          				 </li>
@@ -51,7 +52,7 @@
 					<c:otherwise>
 							<!-- <li class="nav-item active"> -->
 							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_home.path"/>">Home <span class="sr-only">(current)</span></a></li>
-							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_signup.path"/>">Sign Up</a></li>
+							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_signup.path"/>">Sign up</a></li>
 							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_login.path"/>">Log in</a></li>
 							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_contact.path"/>">Contact</a></li>
 					</c:otherwise>
@@ -62,7 +63,6 @@
 					aria-label="Search" name="keyword"> 
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 			</form>
-			<a class="nav-link" href="<fmt:message key="nav_advanced_search.path"/>">Advanced Search</a>
 		</div>
 	</nav>
 
@@ -74,32 +74,36 @@
 					<c:when test="${update == null}">
 						<table>
 				            <tr>
-				                <td colspan="2" align="center"><h2>Event Post Succeeded!</h2></td>
+				                <td align="center"><h2>Event Post Successfully!</h2></td>
 				            </tr>
-				            <tr>
-		          				<td><a href="./event/media/upload?eventId=${eventId}">Add Media Files for My Event.</a></td>
-		          			</tr>
-				            <tr>
-		          				<td><a href="./event/home?eventId=${eventId}">Go to My Event Home.</a></td>
-		          			</tr>
-				          	<tr>
-				          		<td><a href="./">Go to Event Bridge Home.</a></td>
+				            <tr height="50px">
+				            </tr>
+				            <tr height="30px">
+				          		<td><a href="./event/media/upload?eventId=${eventId}">Add Media Files for My Event.</a></td>
+				          	</tr>
+				          	<tr height="30px">
+				          		<td><a href="./event/home?eventId=${eventId}">Go to My Event Home.</a>
+				          	</tr>
+				          	<tr height="30px">
+				          		<td align="center"><a href="./">Go to Event Bridge Home.</a>
 				          	</tr>
 				        </table>
 					</c:when>
 					<c:otherwise>
 						<table>
 				            <tr>
-				                <td colspan="2" align="center"><h2>Event Update Succeeded!</h2></td>
+				                <td align="center"><h2>Event Update Successfully!</h2></td>
 				            </tr>
-				            <tr>
-		          				<td><a href="./event/media/upload?eventId=${eventId}">Add/Change Media Files for My Event.</a></td>
-		          			</tr>
-				            <tr>
-		          				<td><a href="./event/home?eventId=${eventId}">Go to My Event Home.</a></td>
-		          			</tr>
-				          	<tr>
-				          		<td><a href="./">Go to Event Bridge Home.</a></td>
+				            <tr height="50px">
+				            </tr>
+				            <tr height="30px">
+				          		<td align="center"><a href="./event/media/upload?eventId=${eventId}">Add/Change Media Files for My Event.</a></td>
+				          	</tr>
+				          	<tr height="30px">
+				          		<td align="center"><a href="./account/home">Go to My Account Home.</a>
+				          	</tr>
+				          	<tr height="30px">
+				          		<td align="center"><a href="./">Go to Event Bridge Home.</a>
 				          	</tr>
 				        </table>
 					</c:otherwise>

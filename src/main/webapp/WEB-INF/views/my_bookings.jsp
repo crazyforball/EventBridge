@@ -44,6 +44,7 @@
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_account.path"/>">My Account Home</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_bookings.path"/>?username=${user.username}">My Bookings</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_posts.path"/>?username=${user.username}">My Posts</a>
+				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_post_event.path"/>">Post an Event</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_logout.path"/>">Log out</a>
 				            </div>
          				 </li>
@@ -51,7 +52,7 @@
 					<c:otherwise>
 							<!-- <li class="nav-item active"> -->
 							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_home.path"/>">Home <span class="sr-only">(current)</span></a></li>
-							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_signup.path"/>">Sign Up</a></li>
+							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_signup.path"/>">Sign up</a></li>
 							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_login.path"/>">Log in</a></li>
 							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_contact.path"/>">Contact</a></li>
 					</c:otherwise>
@@ -62,7 +63,6 @@
 					aria-label="Search" name="keyword"> 
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 			</form>
-			<a class="nav-link" href="<fmt:message key="nav_advanced_search.path"/>">Advanced Search</a>
 		</div>
 	</nav>
 
@@ -70,60 +70,36 @@
 	<div class="jumbotron">
 		<div class="container">
 			<div align="center">
-				<table>
-		            <tr>
-		                <td align="center"><h2>My Bookings</h2></td>
-		            </tr>
-		            <c:forEach items="${bookingEventPairs}" var="bookingEventPair">
-		            	<tr>
-		            		<td>
-				            	<table border="1">
-				            		<tr>
-						                <td>Booking ID:</td>
-						                <td>${bookingEventPair.booking.bid}</td>
-					            	</tr>
-					            	<tr>
-						                <td>Booking Date:</td>
-						                <td>${bookingEventPair.booking.bookingDate}</td>
-					            	</tr>
-					            	<tr>
-						                <td>Event Name:</td>
-						                <td>${bookingEventPair.event.eventName}</td>
-					            	</tr>
-					            	<tr>
-						                <td>Organizer:</td>
-						                <td>${bookingEventPair.event.creator.username}</td>
-					            	</tr>
-					            	<tr>
-						                <td>Start Date:</td>
-						                <td>${bookingEventPair.event.startDate}</td>
-					            	</tr>
-					            	<tr>
-						                <td>End Date:</td>
-						                <td>${bookingEventPair.event.endDate}</td>
-					            	</tr>
-					            	<tr>
-						                <td>Location:</td>
-						                <td>${bookingEventPair.event.location}</td>
-					            	</tr>
-					            	<tr>
-					            		<td></td>
-					            		<td align="right"><a href="./booking/cancel?bookingId=${bookingEventPair.booking.bid}"><button type="button">Cancel</button></a></td>
-					            	</tr>
-					            </table>
-					         </td>
-				        </tr>
-				        <tr>
-				        	<td></td>
-				        </tr>
-				        <tr>
-				        	<td></td>
-				        </tr>
-				        <tr>
-				        	<td></td>
-				        </tr>
-		            </c:forEach>
-		        </table>    
+				<c:choose>
+					<c:when test="${sessionScope.user != null}">
+				        <table class="table table-bordered table-hover table-striped display">
+				        	<thead>
+								<tr>
+									<th>Booking ID</th>
+									<th>Booking Date</th>
+						            <th>Event Name</th>
+									<th>State Date</th>
+									<th>End Date</th>
+									<th>Location</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+				            <c:forEach items="${bookingEventPairs}" var="bookingEventPair">
+				            	<tr>
+				            		<td>${bookingEventPair.booking.bid}</td>
+				            		<td>${bookingEventPair.booking.bookingDate}</td>
+				            		<td>${bookingEventPair.event.eventName}</td>
+				            		<td>${bookingEventPair.event.startDate}</td>
+				            		<td>${bookingEventPair.event.endDate}</td>
+				            		<td>${bookingEventPair.event.location}</td>
+				            		<td><a href="./event/home?eventId=${bookingEventPair.event.eid}"><button type="button">&nbspView&nbsp</button></a>&nbsp&nbsp<a href="./booking/cancel?bookingId=${bookingEventPair.booking.bid}"><button type="button">Cancel</button></a></td>
+				            	</tr>
+				            </c:forEach>
+				            <tr height="50px">
+				            </tr>
+				        </table>
+				     </c:when>
+				 </c:choose>  
 		    </div>
 		</div>    
     </div>

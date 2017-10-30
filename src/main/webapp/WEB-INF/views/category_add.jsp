@@ -42,6 +42,15 @@
                 </ul>
             </li>
             <li class="dropdown">
+            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    Category List
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                	<li><a href="${pageContext.request.contextPath}/category/home?adminName=${user.username}">Category Management</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     Operation Log
                     <b class="caret"></b>
@@ -50,23 +59,12 @@
                     <li><a href="${pageContext.request.contextPath}/admin/log-list?adminName=${user.username}">Log List</a></li>
                 </ul>
             </li>
-             <li class="dropdown">
-            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    Category List
-                    <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                	<li><a href="${pageContext.request.contextPath}/category/home?adminName=${user.username}">Category Management</a></li>
-                	<li><a href="${pageContext.request.contextPath}/category/add?adminName=${user.username}">Add New Category</a></li>
-                </ul>
-            </li>
         </ul>
     </div>
     </div>
 </nav>
 
 	<!-- Main jumbotron for a primary marketing message or call to action -->
-	<div class="jumbotron">
 		<div class="container">
 			<div align="center">
 				<table>
@@ -76,14 +74,14 @@
 					<tr>
 						<td>
 							<form:form method="post" commandName="category" action="category/add">
-								<table border="1">
+								<table border="1" width="800">
 									<tr>
-										<td>Category Name:</td>
-										<td><form:input path="categoryName"/></td>
+										<td width="150">Category Name:</td>
+										<td><form:input path="categoryName" size="35"/></td>
 									</tr>
 									<tr>
 										<td>Description:</td>
-										<td><form:textarea path="cdesc"/></td>
+										<td><form:textarea path="cdesc" rows="5" cols="80"/></td>
 									</tr>
 									<tr>
 										<td></td>
@@ -99,7 +97,6 @@
 				</table>
 		    </div>
 		</div>    
-    </div>
 	<!-- /container -->
 
 

@@ -44,6 +44,7 @@
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_account.path"/>">My Account Home</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_bookings.path"/>?username=${user.username}">My Bookings</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_posts.path"/>?username=${user.username}">My Posts</a>
+				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_post_event.path"/>">Post an Event</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_logout.path"/>">Log out</a>
 				            </div>
          				 </li>
@@ -51,7 +52,7 @@
 					<c:otherwise>
 							<!-- <li class="nav-item active"> -->
 							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_home.path"/>">Home <span class="sr-only">(current)</span></a></li>
-							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_signup.path"/>">Sign Up</a></li>
+							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_signup.path"/>">Sign up</a></li>
 							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_login.path"/>">Log in</a></li>
 							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_contact.path"/>">Contact</a></li>
 					</c:otherwise>
@@ -62,7 +63,6 @@
 					aria-label="Search" name="keyword"> 
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 			</form>
-			<a class="nav-link" href="<fmt:message key="nav_advanced_search.path"/>">Advanced Search</a>
 		</div>
 	</nav>
 
@@ -70,92 +70,84 @@
 	<div class="jumbotron">
 		<div class="container">
 			<div align="center">
-				<table>
-				 	<tr>
-		                <td colspan="4" align="center"><h2>Make a Booking</h2></td>
-		          	</tr>
-					<tr>
-						<td>
-							<table border="1">
-					            <tr>
-					                <td>Event Name:</td>
-					                <td>${event.eventName}</td>
-					            </tr>
-					            <tr>
-					                <td>Event Organizer:</td>
-					                <td>${event.creator.username}</td>
-					            </tr>
-					            <tr>
-					                <td>Location:</td>
-					                <td>${event.location}</td>
-					            </tr>
-					            <tr>
-					                <td>Start Date:</td>
-					                <td>${event.startDate}</td>
-					            </tr>
-					            <tr>
-					                <td>End Date:</td>
-					                <td>${event.endDate}</td>
-					            </tr>
-					            <tr>
-					                <td>Capacity:</td>
-					                <td>${event.capacity}</td>
-					            </tr>
-					            <tr>
-					                <td>Fees ($AUD):</td>
-					                <td>${event.fees}</td>
-					            </tr>
-					            <tr>
-					                <td>Category:</td>
-					                <td>${event.category}</td>
-					            </tr>
-					        </table>
-						</td>
-						<td>
-						</td>
-						<td>
-							<form:form method="post" commandName="booking" action="booking/make?eventId=${event.eid}">
-								<table border="1">
-									<tr hidden="true">
-										<td>UID:</td>
-										<td><form:input path="uid" value="${user.uid}"/></td>
-									</tr>
-									<tr hidden="true">
-										<td>EID:</td>
-										<td><form:input path="eid" value="${event.eid}"/></td>
-									</tr>
-									<tr>
-										<td>Firstname:</td>
-										<td>${user.firstName}</td>
-									</tr>
-									<tr>
-										<td>Lastname:</td>
-										<td>${user.lastName}</td>
-									</tr>
-									<tr>
-										<td>DoB (YYYY-MM-DD):</td>
-										<td>${user.DOB}</td>
-									</tr>
-									<tr>
-										<td>Phone:</td>
-										<td>${user.phoneNum}</td>
-									</tr>
-									<tr>
-										<td>Email:</td>
-										<td>${user.email}</td>
-									</tr>
-									<tr>
-										<td></td>
-										<td>
-											<button type="submit" >Confirm</button>
-											<button type="reset" >Cancel </button>
-										</td>
-									</tr>
-								</table>
-							</form:form>
-						</td>
-					</tr>
-				</table>
+				<h2>Confirm Booking Details</h2>
+				<div class="flex-container-mid">
+					<div class="flex-item-mid">
+						<table border="0">
+							<tr height="50px"></tr>
+							<tr class="event-info">
+								<td colspan="2"><b>Event Details:</b></td>
+							</tr>
+				            <tr class="event-info">
+				                <td width="150px">Event Name:</td>
+				                <td>${event.eventName}</td>
+				            </tr>
+				            <tr class="event-info">
+				                <td>Location:</td>
+				                <td>${event.location}</td>
+				            </tr>
+				            <tr class="event-info">
+				                <td>Start Date:</td>
+				                <td>${event.startDate}</td>
+				            </tr>
+				            <tr class="event-info">
+				                <td>End Date:</td>
+				                <td>${event.endDate}</td>
+				            </tr>
+				            <tr class="event-info">
+				                <td>Fees ($AUD):</td>
+				                <td>${event.fees}</td>
+				            </tr>
+				            <tr class="event-info">
+				                <td>Category:</td>
+				                <td>${event.category}</td>
+				            </tr>
+				        </table>
+					</div>
+					<div class="flex-item-mid">
+						<form:form method="post" commandName="booking" action="booking/make?eventId=${event.eid}">
+						<table border="0">
+							<tr height="50px"></tr>
+							<tr class="user-info">
+								<td colspan="2"><b>Contact Details:</b></td>
+							</tr>
+							<tr hidden="true">
+								<td>UID:</td>
+								<td><form:input path="uid" value="${user.uid}"/></td>
+							</tr>
+							<tr hidden="true">
+								<td>EID:</td>
+								<td><form:input path="eid" value="${event.eid}"/></td>
+							</tr>
+							<tr class="user-info">
+								<td width="200px">Firstname:</td>
+								<td>${user.firstName}</td>
+							</tr>
+							<tr class="user-info">
+								<td>Lastname:</td>
+								<td>${user.lastName}</td>
+							</tr>
+							<tr class="user-info">
+								<td>DoB (YYYY-MM-DD):</td>
+								<td>${user.DOB}</td>
+							</tr>
+							<tr class="user-info">
+								<td>Phone:</td>
+								<td>${user.phoneNum}</td>
+							</tr>
+							<tr class="user-info">
+								<td>Email:</td>
+								<td>${user.email}</td>
+							</tr>
+							<tr height="10px">
+							</tr>
+							<tr class="user-info">
+								<td><button type="submit" >Confirm</button>&nbsp&nbsp<button type="reset" >Cancel </button></td>
+							</tr>
+						</table>
+						</form:form>
+					</div>
+				</div>
 		    </div>
 		</div>    
     </div>

@@ -8,11 +8,11 @@
 	<link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
 	<style type="text/css">
 		td.details-control {
-		    background: url('../resources/details_open.png') no-repeat center center;
+		    background: url('./resources/details_open.png') no-repeat center center;
 		    cursor: pointer;
 		}
 		tr.shown td.details-control {
-		    background: url('../resources/details_close.png') no-repeat center center;
+		    background: url('./resources/details_close.png') no-repeat center center;
 		}
 	</style>
 </head>
@@ -53,21 +53,21 @@
                 </ul>
             </li>
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    Operation Log
-                    <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="${pageContext.request.contextPath}/admin/log-list?adminName=${user.username}">Log List</a></li>
-                </ul>
-            </li>
-            <li class="dropdown">
             	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     Category List
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
                 	<li><a href="${pageContext.request.contextPath}/category/home?adminName=${user.username}">Category Management</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    Operation Log
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="${pageContext.request.contextPath}/admin/log-list?adminName=${user.username}">Log List</a></li>
                 </ul>
             </li>
         </ul>
@@ -90,7 +90,6 @@
 				<th>Start Date</th>
 				<th>Creator</th>
 				<th>Status</th>
-				
 			</tr>
 		</thead>
 	</table>

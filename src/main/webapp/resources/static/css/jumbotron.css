@@ -3,6 +3,7 @@ body {
   padding-top: 3.5rem;
 }
 
+/* Website Home */
 #idContainer {width:800px; height:450px;padding:0;}
 .container img{border:0;vertical-align:top;}
 
@@ -32,4 +33,68 @@ body {
 	background-color: #ff9415;
 	font-weight: bold;
 	color:#FFF;
+}
+
+/* Event Home */
+.flex-container {
+    display: -webkit-flex;
+    display: flex;
+    width: 800px;
+    height: 650px;
+}
+
+.flex-item {
+    width: 400px;
+    height: 300px;
+    margin: 10px;
+}
+
+.event-info {
+	height:30px;
+}
+
+.event-post-info {
+	height:50px;
+}
+
+.event-field {
+}
+
+#event-name {
+	font-size: 50px;
+	font-weight: bold;
+}
+
+/* .google-map {
+	width:400px;
+	height:300px;
+} */
+
+/* Account Home */
+.account-info {
+	height:30px;
+}
+
+/* User Registration */
+.user-info {
+	height:30px;
+}
+
+/* Booking Make */
+.flex-container-mid {
+    display: -webkit-flex;
+    display: flex;
+    width: 800px;
+    height: 400px;
+}
+
+.flex-item-mid {
+    width: 400px;
+    height: 200px;
+    margin: 10px;
+}
+
+/* Search Result */
+.search-result-item {
+	font-size:18px;
 }

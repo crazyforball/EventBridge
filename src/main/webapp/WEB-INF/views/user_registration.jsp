@@ -44,6 +44,7 @@
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_account.path"/>">My Account Home</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_bookings.path"/>?username=${user.username}">My Bookings</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_posts.path"/>?username=${user.username}">My Posts</a>
+				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_post_event.path"/>">Post an Event</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_logout.path"/>">Log out</a>
 				            </div>
          				 </li>
@@ -51,7 +52,7 @@
 					<c:otherwise>
 							<!-- <li class="nav-item active"> -->
 							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_home.path"/>">Home <span class="sr-only">(current)</span></a></li>
-							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_signup.path"/>">Sign Up</a></li>
+							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_signup.path"/>">Sign up</a></li>
 							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_login.path"/>">Log in</a></li>
 							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_contact.path"/>">Contact</a></li>
 					</c:otherwise>
@@ -62,7 +63,6 @@
 					aria-label="Search" name="keyword"> 
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 			</form>
-			<a class="nav-link" href="<fmt:message key="nav_advanced_search.path"/>">Advanced Search</a>
 		</div>
 	</nav>
 
@@ -73,50 +73,52 @@
 			<form:form method="post" commandName="userForm" action="account/register">
 				<table border="0" align="center">
 					<tr>
-						<td colspan="2" align="center"><h2><fmt:message key="user_registration.heading"/></h2></td>
+						<td></td>
+						<td align="center"><h2><fmt:message key="user_registration.heading"/></h2></td>
 					</tr>
-					<tr>
-						<td>Username:</td>
+					<tr class="user-info">
+						<td width="200px">Username:</td>
 						<td><form:input path="username" required="true"/></td>
 					</tr>
-					<tr>
+					<tr class="user-info">
 						<td>Password:</td>
 						<td><form:password path="password" required="true"/></td>
 					</tr>
-					<tr>
+					<tr class="user-info">
 						<td>First Name:</td>
 						<td><form:input path="firstName" required="true"/></td>
 					</tr>
-					<tr>
+					<tr class="user-info">
 						<td>Last Name:</td>
 						<td><form:input path="lastName" required="true"/></td>
 					</tr>
-					<tr>
+					<tr class="user-info">
 						<td>Gender:</td>
 						<%-- <td><form:input path="gender" required="true"/></td> --%>
-						<td> <span><form:radiobutton path="gender" value="0"/></span> <span>Male</span> <span><form:radiobutton path="gender" value="1"/></span> <span>Female</span></td>
+						<td>&nbsp<form:radiobutton path="gender" value="0"/>&nbsp&nbspMale&nbsp&nbsp<form:radiobutton path="gender" value="1"/>&nbsp&nbspFemale</td>
 					</tr>
-					<tr>
+					<tr class="user-info">
 						<td>DOB (YYYY-MM-DD):</td>
 						<td><form:input path="DOB" required="true"/></td>
 					</tr>
-					<tr>
+					<tr class="user-info">
 						<td>Phone:</td>
 						<td><form:input path="phoneNum" required="true"/></td>
 					</tr>
-					<tr>
+					<tr class="user-info">
 						<td>Email:</td>
 						<td><form:input path="email" required="true"/></td>
 					</tr>
-					<tr>
+					<tr class="user-info">
 						<td>Passport:</td>
 						<td><form:input path="passport" required="true"/></td>
 					</tr>
-					<tr>
+					<tr class="user-info">
 						<td>DriverLicense:</td>
 						<td><form:input path="driverLicense" required="true"/></td>
 					</tr>
-					<tr>
+					<tr height="10px"></tr>
+					<tr class="user-info">
 						<td></td>
 						<td>
 							<button type="submit" >Submit</button>

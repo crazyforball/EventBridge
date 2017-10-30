@@ -1,7 +1,6 @@
 package com.emsrepo.domain;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,8 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
+import com.emsrepo.utils.DateTimeUtil;
 
 @Entity
 @Table(name = "t_booking")
@@ -23,11 +22,11 @@ public class Booking implements Serializable {
 
 	public Booking() {
 		super();
-		this.bookingDate = new Date();
+		this.bookingDate = DateTimeUtil.getNowadayTime();
 	}
 
 	@Id
-//	@GeneratedValue(strategy = GenerationType.AUTO)
+	// @GeneratedValue(strategy = GenerationType.AUTO)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "bid")
 	private Integer bid;
@@ -38,9 +37,11 @@ public class Booking implements Serializable {
 	@Column(name = "eid")
 	private Integer eid;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "bookingDate")
-	private Date bookingDate;
+	// @Temporal(TemporalType.TIMESTAMP)
+	// @Column(name = "bookingDate")
+	// private Date bookingDate;
+
+	private String bookingDate;
 
 	public Integer getBid() {
 		return bid;
@@ -66,11 +67,19 @@ public class Booking implements Serializable {
 		this.eid = eid;
 	}
 
-	public Date getBookingDate() {
+	// public Date getBookingDate() {
+	// return bookingDate;
+	// }
+	//
+	// public void setBookingDate(Date bookingDate) {
+	// this.bookingDate = bookingDate;
+	// }
+
+	public String getBookingDate() {
 		return bookingDate;
 	}
 
-	public void setBookingDate(Date bookingDate) {
+	public void setBookingDate(String bookingDate) {
 		this.bookingDate = bookingDate;
 	}
 

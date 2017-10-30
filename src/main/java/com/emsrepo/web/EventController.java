@@ -72,6 +72,14 @@ public class EventController {
 		if (eventId != 0) {
 			Event event = eventService.retrieveEvent(eventId);
 			request.setAttribute("event", event);
+			
+			String locationInURL = null;
+			locationInURL = event.getLocation().trim().replace(" ", "+");
+			System.out.print("location in URL:" + locationInURL);
+			if (locationInURL != null) {
+				request.setAttribute("locationInURL", locationInURL);
+			}
+			
 			return "event_home";
 		}
 		return null;
@@ -239,6 +247,13 @@ public class EventController {
 			return null;
 		}
 		return "user_login";
+	}
+	
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public String search(@RequestParam("keyword") String keyword, HttpServletRequest request) throws Exception {
+		System.out.println("start searching...");
+		request.setAttribute("events", eventService.retrieveEventsByKeyword(keyword));
+		return "search_result";
 	}
 
 }

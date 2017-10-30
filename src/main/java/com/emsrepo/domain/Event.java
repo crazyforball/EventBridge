@@ -1,8 +1,6 @@
 package com.emsrepo.domain;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,13 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.emsrepo.utils.DateTimeUtil;
 
 @Entity
 @Table(name = "t_event")
@@ -31,11 +26,11 @@ public class Event implements Serializable {
 	public Event() {
 		super();
 		this.status = "PASS";
-		this.createDate = new Date();
+		this.createDate = DateTimeUtil.getNowadayTime();
 	}
 
 	@Id
-//	@GeneratedValue(strategy = GenerationType.AUTO)
+	// @GeneratedValue(strategy = GenerationType.AUTO)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "eid")
 	private int eid;
@@ -89,13 +84,15 @@ public class Event implements Serializable {
 	@JoinColumn(name = "uid")
 	private User creator;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "createDate")
-	private Date createDate;
+	// @Temporal(TemporalType.TIMESTAMP)
+	// @Column(name = "createDate")
+	// private Date createDate;
 
-//	@JsonIgnore
-//	@ManyToMany(mappedBy = "bookedEvents")
-//	private Set<User> bookingUsers;
+	private String createDate;
+
+	// @JsonIgnore
+	// @ManyToMany(mappedBy = "bookedEvents")
+	// private Set<User> bookingUsers;
 
 	public int getEid() {
 		return eid;
@@ -209,20 +206,28 @@ public class Event implements Serializable {
 		this.creator = creator;
 	}
 
-	public Date getCreateDate() {
+	public String getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
 	}
 
-//	public Set<User> getBookingUsers() {
-//		return bookingUsers;
-//	}
-//
-//	public void setBookingUsers(Set<User> bookingUsers) {
-//		this.bookingUsers = bookingUsers;
-//	}
+	// public Date getCreateDate() {
+	// return createDate;
+	// }
+	//
+	// public void setCreateDate(Date createDate) {
+	// this.createDate = createDate;
+	// }
+
+	// public Set<User> getBookingUsers() {
+	// return bookingUsers;
+	// }
+	//
+	// public void setBookingUsers(Set<User> bookingUsers) {
+	// this.bookingUsers = bookingUsers;
+	// }
 
 }

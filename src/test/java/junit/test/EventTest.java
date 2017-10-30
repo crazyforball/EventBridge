@@ -1,7 +1,5 @@
 package junit.test;
 
-import java.util.Date;
-
 import com.emsrepo.domain.Event;
 import com.emsrepo.domain.User;
 
@@ -37,22 +35,29 @@ public class EventTest extends TestCase {
 		assertEquals(testEventName, event.getEventName());
 	}
 
-	 public void testSetAndGetCreator() {
-	 User testCreator = new User();
-	 assertNull(event.getCreator());
-	 event.setCreator(testCreator);
-	 assertEquals(testCreator, event.getCreator());
-	 }
+	public void testSetAndGetCreator() {
+		User testCreator = new User();
+		assertNull(event.getCreator());
+		event.setCreator(testCreator);
+		assertEquals(testCreator, event.getCreator());
+	}
 
-//	public void testSetAndGetCreator() {
-//		String testCreator = "aCreator";
-//		assertNull(event.getCreator());
-//		event.setCreator(testCreator);
-//		assertEquals(testCreator, event.getCreator());
-//	}
+	// public void testSetAndGetCreator() {
+	// String testCreator = "aCreator";
+	// assertNull(event.getCreator());
+	// event.setCreator(testCreator);
+	// assertEquals(testCreator, event.getCreator());
+	// }
+
+	// public void testSetAndGetCreateDate() {
+	// Date testCreateDate = new Date();
+	// assertNull(event.getCreateDate());
+	// event.setCreateDate(testCreateDate);
+	// assertEquals(testCreateDate, event.getCreateDate());
+	// }
 
 	public void testSetAndGetCreateDate() {
-		Date testCreateDate = new Date();
+		String testCreateDate = "aTestCreateDate";
 		assertNull(event.getCreateDate());
 		event.setCreateDate(testCreateDate);
 		assertEquals(testCreateDate, event.getCreateDate());

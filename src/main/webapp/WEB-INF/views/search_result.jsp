@@ -11,7 +11,7 @@
 <meta name="author" content="">
 <link rel="icon" href="http://getbootstrap.com/favicon.ico">
 
-<title>Account Update</title>
+<title>Search Results</title>
 
 <!-- Bootstrap core CSS -->
 <link href="<fmt:message key="css_js.path"/>/css/bootstrap.min.css" rel="stylesheet">
@@ -68,16 +68,23 @@
 
 	<!-- Main jumbotron for a primary marketing message or call to action -->
 	<div class="jumbotron">
-		<div class="container" id="loginContainer">
-			<div align="center">
-		        <table border="0">
-		            <tr>
-		                <td colspan="2" align="center"><h2>Update Account Failed!</h2></td>
+		<div class="container">
+			<div align="left">
+		        <table>
+		        	<tr><td><h2>Search Results:</h2></td></tr>
+		        	<tr height="20px"></tr>
+		            <c:forEach items="${events}" var="event">
+		            	<tr height="10px"></tr>
+		            	<tr>
+		            		<td><a href="./event/home?eventId=${event.eid}"><span class="search-result-item">${event.eventName}&nbsp...&nbsp${event.location}</span></a></td>
+		            	</tr>
+		            </c:forEach>
+		            <tr height="50px">
 		            </tr>
 		        </table>
 		    </div>
-		</div>
-	</div>
+		</div>    
+    </div>
 	<!-- /container -->
 
 

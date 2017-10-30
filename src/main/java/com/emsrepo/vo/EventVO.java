@@ -24,7 +24,7 @@ public class EventVO implements Serializable {
 	// private Category category;
 	private User creator;
 //	private String creator;
-	private String cdate;
+	private String createDate;
 
 	public int getEid() {
 		return eid;
@@ -130,12 +130,12 @@ public class EventVO implements Serializable {
 //	}
 	
 
-	public String getCdate() {
-		return cdate;
+	public String getCreateDate() {
+		return createDate;
 	}
 
-	public void setCdate(String cdate) {
-		this.cdate = cdate;
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
 	}
 
 }

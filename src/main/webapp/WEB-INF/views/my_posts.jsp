@@ -44,6 +44,7 @@
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_account.path"/>">My Account Home</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_bookings.path"/>?username=${user.username}">My Bookings</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_posts.path"/>?username=${user.username}">My Posts</a>
+				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_post_event.path"/>">Post an Event</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_logout.path"/>">Log out</a>
 				            </div>
          				 </li>
@@ -51,7 +52,7 @@
 					<c:otherwise>
 							<!-- <li class="nav-item active"> -->
 							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_home.path"/>">Home <span class="sr-only">(current)</span></a></li>
-							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_signup.path"/>">Sign Up</a></li>
+							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_signup.path"/>">Sign up</a></li>
 							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_login.path"/>">Log in</a></li>
 							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_contact.path"/>">Contact</a></li>
 					</c:otherwise>
@@ -62,7 +63,6 @@
 					aria-label="Search" name="keyword"> 
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 			</form>
-			<a class="nav-link" href="<fmt:message key="nav_advanced_search.path"/>">Advanced Search</a>
 		</div>
 	</nav>
 
@@ -72,67 +72,25 @@
 			<div align="center">
 				<c:choose>
 					<c:when test="${sessionScope.user != null}">
-				        <table>
-				            <tr>
-				                <td align="center"><h2>My Posts</h2></td>
-				            </tr>
+				        <table class="table table-bordered table-hover table-striped display">
+				        	<thead>
+								<tr>
+									<th>Event ID</th>
+						            <th>Event Name</th>
+									<th>Create Date</th>
+									<th>Action</th>
+								</tr>
+							</thead>
 				            <c:forEach items="${events}" var="event">
 				            	<tr>
-				            		<td>
-						            	<table border="1">
-							            	<tr>
-								                <td>Event Name:</td>
-								                <td>${event.eventName}</td>
-								            </tr>
-								            <tr>
-								                <td>Event Organizer:</td>
-								                <td>${event.creator.username}</td>
-								            </tr>
-								            <tr>
-								                <td>Location:</td>
-								                <td>${event.location}</td>
-								            </tr>
-								            <tr>
-								                <td>Start Date:</td>
-								                <td>${event.startDate}</td>
-								            </tr>
-								            <tr>
-								                <td>End Date:</td>
-								                <td>${event.endDate}</td>
-								            </tr>
-								            <tr>
-								                <td>Capacity:</td>
-								                <td>${event.capacity}</td>
-								            </tr>
-								            <tr>
-								                <td>Fees ($AUD):</td>
-								                <td>${event.fees}</td>
-								            </tr>
-								            <tr>
-								                <td>Category:</td>
-								                <td>${event.category}</td>
-								            </tr>
-								            <tr>
-								                <td>Create Date:</td>
-								                <td>${event.createDate}</td>
-								            </tr>
-								            <tr>
-								            	<td></td>
-								            	<td align="right"><a href="./event/edit?eventId=${event.eid}"><Button type="button">Edit</Button></a>   <a href="./event/delete?eventId=${event.eid}"><Button type="button">Delete</Button></a></td>
-								            </tr>
-							            </table>
-							         </td>
-						        </tr>
-						        <tr>
-						        	<td></td>
-						        </tr>
-						        <tr>
-						        	<td></td>
-						        </tr>
-						        <tr>
-						        	<td></td>
-						        </tr>
+				            		<td>${event.eid}</td>
+				            		<td>${event.eventName}</td>
+				            		<td>${event.createDate}</td>
+				            		<td><a href="./event/home?eventId=${event.eid}"><Button type="button">&nbspView&nbsp</Button></a>&nbsp&nbsp<a href="./event/edit?eventId=${event.eid}"><Button type="button">&nbsp&nbspEdit&nbsp&nbsp</Button></a>&nbsp&nbsp<a href="./event/delete?eventId=${event.eid}"><Button type="button">Delete</Button></a></td>
+				            	</tr>
 				            </c:forEach>
+				            <tr height="50px">
+				            </tr>
 				        </table>
 				     </c:when>
 				 </c:choose>    

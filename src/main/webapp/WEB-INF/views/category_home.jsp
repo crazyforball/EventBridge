@@ -42,6 +42,15 @@
                 </ul>
             </li>
             <li class="dropdown">
+            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    Category List
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                	<li><a href="${pageContext.request.contextPath}/category/home?adminName=${user.username}">Category Management</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     Operation Log
                     <b class="caret"></b>
@@ -50,69 +59,41 @@
                     <li><a href="${pageContext.request.contextPath}/admin/log-list?adminName=${user.username}">Log List</a></li>
                 </ul>
             </li>
-             <li class="dropdown">
-            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    Category List
-                    <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                	<li><a href="${pageContext.request.contextPath}/category/home?adminName=${user.username}">Category Management</a></li>
-                	<li><a href="${pageContext.request.contextPath}/category/add?adminName=${user.username}">Add New Category</a></li>
-                </ul>
-            </li>
         </ul>
     </div>
     </div>
 </nav>
 
 	<!-- Main jumbotron for a primary marketing message or call to action -->
-	<div class="jumbotron">
-		<div class="container">
-			<div align="center">
-				<c:choose>
-					<c:when test="${sessionScope.user != null}">
-				        <table>
-				            <tr>
-				                <td align="center"><h2>Category List</h2></td>
-				            </tr>
-				            <c:forEach items="${categoryList}" var="category">
-				            	<tr>
-				            		<td>
-						            	<table border="1">
-						            		<tr>
-								                <td>Category ID:</td>
-								                <td>${category.cid}</td>
-							            	</tr>
-							            	<tr>
-								                <td>Category Name:</td>
-								                <td>${category.categoryName}</td>
-							            	</tr>
-							            	<tr>
-								                <td>Description:</td>
-								                <td>${category.cdesc}</td>
-							            	</tr>
-							            	<tr>
-							            		<td></td>
-							            		<td align="right"><a href="./category/delete?categoryId=${category.cid}&adminName=${user.username}"><button type="button">Delete</button></a></td>
-							            	</tr>
-							            </table>
-							         </td>
-						        </tr>
-						        <tr>
-						        	<td></td>
-						        </tr>
-						        <tr>
-						        	<td></td>
-						        </tr>
-						        <tr>
-						        	<td></td>
-						        </tr>
-				            </c:forEach>
-				        </table>
-				     </c:when>
-				 </c:choose>    
-		    </div>
-		</div>    
+	<div class="container" >
+		<div align="center">
+			<c:choose>
+				<c:when test="${sessionScope.user != null}">
+			        <table class="table table-bordered table-hover table-striped display">
+			            <thead>
+							<tr>
+								<th><a href="${pageContext.request.contextPath}/category/add?adminName=${user.username}"><button type="button">Add</button></a></th>
+								<th>Category ID</th>
+					            <th>Category Name</th>
+								<th>Description</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+			            <c:forEach items="${categoryList}" var="category">
+			            	<tr>
+		            			<td></td>
+				                <td>${category.cid}</td>
+				                <td>${category.categoryName}</td>
+				                <td>${category.cdesc}</td>
+				                <td align="right"><a href="./category/delete?categoryId=${category.cid}&adminName=${user.username}"><button type="button">Delete</button></a></td>
+					        </tr>
+			            </c:forEach>
+			            <tr height="50">
+			           	</tr>
+			        </table>
+			     </c:when>
+			 </c:choose>    
+	    </div>
     </div>
 	<!-- /container -->
 

@@ -44,6 +44,7 @@
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_account.path"/>">My Account Home</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_bookings.path"/>?username=${user.username}">My Bookings</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_posts.path"/>?username=${user.username}">My Posts</a>
+				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_post_event.path"/>">Post an Event</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_logout.path"/>">Log out</a>
 				            </div>
          				 </li>
@@ -51,7 +52,7 @@
 					<c:otherwise>
 							<!-- <li class="nav-item active"> -->
 							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_home.path"/>">Home <span class="sr-only">(current)</span></a></li>
-							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_signup.path"/>">Sign Up</a></li>
+							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_signup.path"/>">Sign up</a></li>
 							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_login.path"/>">Log in</a></li>
 							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_contact.path"/>">Contact</a></li>
 					</c:otherwise>
@@ -62,7 +63,6 @@
 					aria-label="Search" name="keyword"> 
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 			</form>
-			<a class="nav-link" href="<fmt:message key="nav_advanced_search.path"/>">Advanced Search</a>
 		</div>
 	</nav>
 
@@ -70,74 +70,82 @@
 	<div class="jumbotron">
 		<div class="container">
 			<div align="center">
-				<table>
-				 	<tr>
-		                <td colspan="2" align="center"><h2>Event Home</h2></td>
-		          	</tr>
-					<tr>
-						<td>
-							<table>
-					        	<tr>
-					        		<td><img alt="${event.imageUrl}" src="${basePath}${event.imageUrl}" width="400" height="300"></td>
-					        	</tr>
-								<tr>
-									<td><embed src="${basePath}${event.audioUrl}" width="400" height="50" loop="false" autostart="false"/></td>
-								</tr>
-							</table>
-						</td>
-						<td>
-							<table>
-					            <tr>
-					                <td>Event Name:</td>
-					                <td>${event.eventName}</td>
-					            </tr>
-					            <tr>
-					                <td>Event Organizer:</td>
-					                <td>${event.creator.username}</td>
-					            </tr>
-					            <tr>
-					                <td>Location:</td>
-					                <td><a href="http://maps.google.com/?q=${event.location}">${event.location}</a></td>
-					            </tr>
-					            <tr>
-					                <td>Start Date:</td>
-					                <td>${event.startDate}</td>
-					            </tr>
-					            <tr>
-					                <td>End Date:</td>
-					                <td>${event.endDate}</td>
-					            </tr>
-					            <tr>
-					                <td>Capacity:</td>
-					                <td>${event.capacity}</td>
-					            </tr>
-					            <tr>
-					                <td>Fees ($AUD):</td>
-					                <td>${event.fees}</td>
-					            </tr>
-					            <tr>
-					                <td>Category:</td>
-					                <td>${event.category}</td>
-					            </tr>
-					        </table>
-						</td>
-					</tr>
-					<tr>
-		            	<td></td>
-		            	<c:choose>
-		            		<c:when test="${sessionScope.user.username == event.creator.username}">
-		      					<td align="right"><a href="./event/edit?eventId=${event.eid}"><Button type="button">Edit</Button></a>   <a href="./event/delete?eventId=${event.eid}"><Button type="button">Delete</Button></a></td>
-		      				</c:when>
-		      				<c:otherwise>
-		      					<td align="right"><a href="./booking/make?eventId=${event.eid}"><input type="button" value=" Book "/></a> <a href=""><input type="button" value="Follow"/></a></td>
-		      				</c:otherwise>
-		      			</c:choose>
-					</tr>
-				</table>
+		
+				<div class="flex-container">
+					<div class="flex-item">
+						<table id="event-media">
+				        	<tr>
+				        		<td><img alt="${event.imageUrl}" src="${basePath}${event.imageUrl}" width="400" height="300"></td>
+				        	</tr>
+							<tr>
+								<td><embed src="${basePath}${event.audioUrl}" width="400" height="50" loop="false" autostart="false"/></td>
+							</tr>
+							<tr height="50">
+							</tr>
+							<tr class="event-info">
+								<td class="event-field">Description:</td>
+							</tr>
+							<tr class="event-info">
+								<td>${event.description}</td>
+							</tr>
+						</table>
+					</div>
+					<div class="flex-item">
+						<table id="event-desc">
+				            <tr>
+				                <!-- <td>Event Name:</td> -->
+				                <td colspan="2"><h1 id="event-name">${event.eventName}</h1></td>
+				            </tr>
+				            <tr height="60">
+				            </tr>
+				            <tr class="event-info">
+				                <td><span class="event-field">Location:</span>&nbsp&nbsp${event.location}</td>
+				            </tr>
+				            <tr class="event-info">
+				                <td><span class="event-field">Start Date:</span>&nbsp&nbsp${event.startDate}</td>
+				            </tr>
+				            <tr class="event-info">
+				                <td><span class="event-field">End Date:</span>&nbsp&nbsp${event.endDate}</td>
+				            </tr>
+				            <tr class="event-info">
+				                <td><span class="event-field">Capacity:</span>&nbsp&nbsp${event.capacity}</td>
+				            </tr>
+				            <tr class="event-info">
+				                <td><span class="event-field">Fees ($AUD):</span>&nbsp&nbsp${event.fees}</td>
+				            </tr>
+				            <tr class="event-info">
+				                <td><span class="event-field">Category:</span>&nbsp&nbsp${event.category}</td>
+				            </tr>
+				            <tr height="20px">
+				            	<td></td>
+				            </tr>
+				            <c:choose>
+			            		<c:when test="${sessionScope.user.username == event.creator.username}">
+			            		<tr class="event-info">
+			      					<td align="left"><a href="./event/edit?eventId=${event.eid}"><Button type="button">&nbsp&nbspEdit&nbsp&nbsp</Button></a>&nbsp&nbsp<a href="./event/delete?eventId=${event.eid}"><Button type="button">Delete</Button></a></td>
+			      				</tr>
+			      				</c:when>
+			      				<c:otherwise>
+			      				<tr class="event-info">
+			      					<td align="left"><a href="./booking/make?eventId=${event.eid}"><Button type="button">&nbspBook&nbsp</Button></a>&nbsp&nbsp<a href=""><Button type="button">Follow</Button></a></td>
+			      				</tr>
+			      				</c:otherwise>
+			      			</c:choose>
+			      			<tr height="50">
+							</tr>
+			      			<tr>
+			      				<td>
+			      					<div class="google-map">
+			      						<a href="http://maps.google.com/?q=${locationInURL}"><img src="https://maps.googleapis.com/maps/api/staticmap?center=${locationInURL}&zoom=14&size=640x400&maptype=roadmap&markers=${locationInURL}&key=AIzaSyBAHxui9Nd_RSSlCWV8kdpM2CATCFjDdmM" style="width:100%"></a>
+			      					</div>
+			      				</td>
+			      			</tr>
+				        </table>
+				   </div>
+			   </div>
 		    </div>
-		</div>    
-    </div>
-
+		</div>
+	</div>
 
 	<!-- /container -->
 

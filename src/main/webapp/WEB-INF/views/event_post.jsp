@@ -44,6 +44,7 @@
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_account.path"/>">My Account Home</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_bookings.path"/>?username=${user.username}">My Bookings</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_posts.path"/>?username=${user.username}">My Posts</a>
+				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_post_event.path"/>">Post an Event</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_logout.path"/>">Log out</a>
 				            </div>
          				 </li>
@@ -51,7 +52,7 @@
 					<c:otherwise>
 							<!-- <li class="nav-item active"> -->
 							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_home.path"/>">Home <span class="sr-only">(current)</span></a></li>
-							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_signup.path"/>">Sign Up</a></li>
+							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_signup.path"/>">Sign up</a></li>
 							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_login.path"/>">Log in</a></li>
 							<li class="nav-item"><a class="nav-link" href="<fmt:message key="nav_contact.path"/>">Contact</a></li>
 					</c:otherwise>
@@ -62,7 +63,6 @@
 					aria-label="Search" name="keyword"> 
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 			</form>
-			<a class="nav-link" href="<fmt:message key="nav_advanced_search.path"/>">Advanced Search</a>
 		</div>
 	</nav>
 
@@ -73,41 +73,42 @@
 			<form:form method="post" commandName="eventForm" action="event/post">
 				<table align="center">
 					<tr>
-						<td colspan="2" align="center"><h2><fmt:message key="event_post.heading"/></h2></td>
+						<td></td>
+						<td><h2><fmt:message key="event_post.heading"/></h2></td>
 					</tr>
-					<tr>
-						<td>Event name:</td>
-						<td><form:input path="eventName" required="true"/></td>
+					<tr class="event-post-info">
+						<td width="300px">Event name:</td>
+						<td><form:input path="eventName" required="true" size="25"/></td>
 					</tr>
-					<tr>
+					<tr class="event-post-info">
 						<td>Location:</td>
-						<td><form:input path="location" required="true"/></td>
+						<td><form:input path="location" required="true" size="25"/></td>
 					</tr>
-					<tr>
+					<tr class="event-post-info">
 						<td>Start Date (YYYY-MM-DD hh:mm):</td>
-						<td><form:input path="startDate" required="true"/></td>
+						<td><form:input path="startDate" required="true" size="25"/></td>
 					</tr>
-					<tr>
+					<tr class="event-post-info">
 						<td>End Date (YYYY-MM-DD hh:mm):</td>
-						<td><form:input path="endDate" required="true"/></td>
+						<td><form:input path="endDate" required="true" size="25"/></td>
 					</tr>
-					<tr>
+					<tr class="event-post-info">
 						<td>Capacity:</td>
-						<td><form:input path="capacity" required="true"/></td>
+						<td><form:input path="capacity" required="true" size="10"/></td>
 					</tr>
-					<tr>
+					<tr class="event-post-info">
 						<td>Fees ($AUD):</td>
-						<td><form:input path="fees" value="0.00" required="true"/></td>
+						<td><form:input path="fees" value="0.00" required="true" size="10"/></td>
 					</tr>
-					<tr>
+					<tr class="event-post-info">
 						<td>Category:</td>
 						<td><form:select path="category" items="${categoryNames}" required="true"/></td>
 					</tr>
-					<tr>
+					<tr class="event-post-info">
 						<td>Description:</td>
-						<td><form:textarea path="description"/></td>
+						<td><form:textarea path="description" rows="5" cols="50"/></td>
 					</tr>
-					<tr>
+					<tr class="event-post-info">
 						<td></td>
 						<td>
 							<button type="submit" >Submit</button>
