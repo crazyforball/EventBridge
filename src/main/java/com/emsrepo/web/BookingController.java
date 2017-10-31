@@ -1,6 +1,6 @@
 package com.emsrepo.web;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.emsrepo.domain.Booking;
-import com.emsrepo.domain.BookingEventPair;
 import com.emsrepo.domain.Event;
 import com.emsrepo.domain.User;
 import com.emsrepo.service.BookingService;
 import com.emsrepo.service.EventService;
+import com.emsrepo.utils.DateTimeUtil;
 
 @Controller
 @RequestMapping(value = "/booking")
@@ -35,19 +35,25 @@ public class BookingController {
 		if ((Boolean) request.getAttribute("hasLoggedIn")) {
 			if ((Boolean) request.getAttribute("authorized")) {
 				User user = (User) request.getSession().getAttribute("user");
-				
-				List<Booking> bookings = bookingService.retrieveBookings(user.getUid());
-				List<BookingEventPair> bookingEventPairs = new ArrayList<BookingEventPair>();
+				List<Booking> bookings = bookingService.retrieveBookings(user);
 				
 				for (Iterator<Booking> iterator=bookings.iterator(); iterator.hasNext();) {
 					Booking booking = iterator.next();
-					bookingEventPairs.add(new BookingEventPair(booking, eventService.retrieveEvent(booking.getEid())));
+					Event event = booking.getEvent();
+					Date endDate = DateTimeUtil.toDate(event.getEndDate());
+					System.out.println("endDate: " + endDate);
+					if (endDate != null) {
+						if (endDate.before(new Date())) {
+							event.setStatus("FINISHED");
+						}
+					}
 				}
-				request.setAttribute("bookingEventPairs", bookingEventPairs);
+				
+				request.setAttribute("bookings", bookings);
 				return "my_bookings";
 			}
 			return null;
-		} 
+		}
 		return "user_login";
 	}
 
@@ -72,18 +78,22 @@ public class BookingController {
 
 	@RequestMapping(value = "/make", method = RequestMethod.POST)
 	public String processBooking(@ModelAttribute("booking") Booking booking, HttpServletRequest request) {
+		int eventId = 0;
+		try {
+			eventId = Integer.parseInt(request.getParameter("eventId"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		if (eventId != 0) {
+			Event event = eventService.retrieveEvent(eventId);
+			User creator = (User) request.getSession().getAttribute("user");
+			booking.setCreator(creator);
+			booking.setEvent(event);
+		}
+
 		if (bookingService.registerBooking(booking)) {
-			int eventId = 0;
-			try {
-				eventId = Integer.parseInt(request.getParameter("eventId"));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			if (eventId != 0) {
-				request.setAttribute("event", eventService.retrieveEvent(eventId));
-				request.setAttribute("booking", bookingService.retrieveBooking(booking.getUid(), eventId));
-				return "booking_make_success";
-			}
+			return "booking_make_success";
 		}
 		return "booking_make_failure";
 	}

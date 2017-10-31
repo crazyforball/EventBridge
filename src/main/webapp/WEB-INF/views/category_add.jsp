@@ -29,7 +29,7 @@
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                	<li><a href="${pageContext.request.contextPath}/admin/user-mgmt?adminName=${user.username}">User Management</a></li>
+                	<li><a href="./admin/user-mgmt?adminName=${user.username}">User Management</a></li>
                 </ul>
             </li>
             <li class="dropdown">
@@ -38,7 +38,7 @@
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="${pageContext.request.contextPath}/admin/event-mgmt?adminName=${user.username}">Event Management</a></li>
+                    <li><a href="./admin/event-mgmt?adminName=${user.username}">Event Management</a></li>
                 </ul>
             </li>
             <li class="dropdown">
@@ -47,7 +47,7 @@
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                	<li><a href="${pageContext.request.contextPath}/category/home?adminName=${user.username}">Category Management</a></li>
+                	<li><a href="./category/home?adminName=${user.username}">Category Management</a></li>
                 </ul>
             </li>
             <li class="dropdown">
@@ -56,7 +56,7 @@
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="${pageContext.request.contextPath}/admin/log-list?adminName=${user.username}">Log List</a></li>
+                    <li><a href="./admin/log-list?adminName=${user.username}">Log List</a></li>
                 </ul>
             </li>
         </ul>
@@ -69,15 +69,17 @@
 			<div align="center">
 				<table>
 				 	<tr>
-		                <td colspan="4" align="center"><h2>Add a Category</h2></td>
+		                <td colspan="4" align="center"><h2>Add Category</h2></td>
+		          	</tr>
+		          	<tr height="30px">
 		          	</tr>
 					<tr>
 						<td>
 							<form:form method="post" commandName="category" action="category/add">
 								<table border="1" width="800">
 									<tr>
-										<td width="150">Category Name:</td>
-										<td><form:input path="categoryName" size="35"/></td>
+										<td width="150px">Category Name:</td>
+										<td><form:input path="categoryName" size="40"/></td>
 									</tr>
 									<tr>
 										<td>Description:</td>
@@ -87,7 +89,7 @@
 										<td></td>
 										<td>
 											<button type="submit" >Submit</button>
-											<button type="reset" >Cancel </button>
+											<button type="reset" onClick="javascript:history.back(-1);">Cancel </button>
 										</td>
 									</tr>
 								</table>

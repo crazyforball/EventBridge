@@ -29,7 +29,7 @@
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                	<li><a href="${pageContext.request.contextPath}/admin/user-mgmt?adminName=${user.username}">User Management</a></li>
+                	<li><a href="./admin/user-mgmt?adminName=${user.username}">User Management</a></li>
                 </ul>
             </li>
             <li class="dropdown">
@@ -38,7 +38,7 @@
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="${pageContext.request.contextPath}/admin/event-mgmt?adminName=${user.username}">Event Management</a></li>
+                    <li><a href="./admin/event-mgmt?adminName=${user.username}">Event Management</a></li>
                 </ul>
             </li>
             <li class="dropdown">
@@ -47,7 +47,7 @@
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                	<li><a href="${pageContext.request.contextPath}/category/home?adminName=${user.username}">Category Management</a></li>
+                	<li><a href="./category/home?adminName=${user.username}">Category Management</a></li>
                 </ul>
             </li>
             <li class="dropdown">
@@ -56,7 +56,7 @@
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="${pageContext.request.contextPath}/admin/log-list?adminName=${user.username}">Log List</a></li>
+                    <li><a href="./admin/log-list?adminName=${user.username}">Log List</a></li>
                 </ul>
             </li>
         </ul>
@@ -72,7 +72,7 @@
 			        <table class="table table-bordered table-hover table-striped display">
 			            <thead>
 							<tr>
-								<th><a href="${pageContext.request.contextPath}/category/add?adminName=${user.username}"><button type="button">Add</button></a></th>
+								<th><a href="./category/add?adminName=${user.username}"><button type="button">Add</button></a></th>
 								<th>Category ID</th>
 					            <th>Category Name</th>
 								<th>Description</th>
@@ -85,7 +85,7 @@
 				                <td>${category.cid}</td>
 				                <td>${category.categoryName}</td>
 				                <td>${category.cdesc}</td>
-				                <td align="right"><a href="./category/delete?categoryId=${category.cid}&adminName=${user.username}"><button type="button">Delete</button></a></td>
+				                <td><a href="./category/delete?categoryId=${category.cid}&adminName=${user.username}"><button type="button">Delete</button></a></td>
 					        </tr>
 			            </c:forEach>
 			            <tr height="50">

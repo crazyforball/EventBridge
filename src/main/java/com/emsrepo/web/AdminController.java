@@ -271,16 +271,10 @@ public class AdminController {
 	@RequestMapping(value = "/admin/getLogList", method = RequestMethod.GET)
 	@ResponseBody
 	public String getLogList(Model model, HttpServletRequest request) throws Exception {
-//		if ((Boolean) request.getAttribute("hasLoggedIn")) {
-//			if ((Boolean) request.getAttribute("isAdmin")) {
-				List<Logger> logList = loggerService.getLoggerDetailList();
-				ObjectMapper mapper = new ObjectMapper();
-				String json = "";
-				json = mapper.writeValueAsString(logList);
-				return json;
-//			}
-//			return null;
-//		}
-//		return "user_login";
+		List<Logger> logList = loggerService.getLoggerDetailList();
+		ObjectMapper mapper = new ObjectMapper();
+		String json = "";
+		json = mapper.writeValueAsString(logList);
+		return json;
 	}
 }

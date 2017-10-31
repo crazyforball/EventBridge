@@ -5,16 +5,26 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.emsrepo.domain.Booking;
+import com.emsrepo.domain.Comment;
 import com.emsrepo.domain.Event;
+import com.emsrepo.domain.Following;
 import com.emsrepo.domain.User;
 import com.emsrepo.service.BookingService;
+import com.emsrepo.service.CommentService;
 import com.emsrepo.service.EventService;
+import com.emsrepo.service.FollowingService;
 
 //@Aspect
 //@Component
 public class AuthenticationInterceptor {
 	@Autowired
 	private BookingService bookingService;
+	
+	@Autowired
+	private FollowingService followingService;
+	
+	@Autowired
+	private CommentService commentService;
 
 	@Autowired
 	private EventService eventService;
@@ -23,6 +33,9 @@ public class AuthenticationInterceptor {
 		System.out.println("authenticate");
 		int eventId = 0;
 		int bookingId = 0;
+		int followingId = 0;
+		int commentId = 0;
+		
 		String adminName = request.getParameter("adminName");
 		String username = request.getParameter("username");
 		User user = (User) request.getSession().getAttribute("user");
@@ -30,6 +43,7 @@ public class AuthenticationInterceptor {
 		if (user != null) {
 			request.setAttribute("hasLoggedIn", true);
 			System.out.println("hasLoggedIn");
+			
 			try {
 				String eventIdStr = request.getParameter("eventId");
 				if (eventIdStr != null && eventIdStr.length() > 0) {
@@ -46,6 +60,23 @@ public class AuthenticationInterceptor {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			try {
+				String followingIdStr = request.getParameter("followingId");
+				if (followingIdStr != null && followingIdStr.length() > 0) {
+					followingId = Integer.parseInt(followingIdStr);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				String commentIdStr = request.getParameter("commentId");
+				if (commentIdStr != null && commentIdStr.length() > 0) {
+					commentId = Integer.parseInt(commentIdStr);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 			if (eventId != 0) {
 				Event event = eventService.retrieveEvent(eventId);
 				if (event != null) {
@@ -59,13 +90,34 @@ public class AuthenticationInterceptor {
 			if (bookingId != 0) {
 				Booking booking = bookingService.retrieveBooking(bookingId);
 				if (booking != null) {
-					if (user.getUid().compareTo(booking.getUid()) == 0) {
+					if (user.getUid().compareTo(booking.getCreator().getUid()) == 0) {
 						request.setAttribute("authorized", true);
 						System.out.println("authorized");
 						return;
 					}
 				}
 			}
+			if (followingId != 0) {
+				Following following = followingService.retrieveFollowing(followingId);
+				if (following != null) {
+					if (user.getUid().compareTo(following.getCreator().getUid()) == 0) {
+						request.setAttribute("authorized", true);
+						System.out.println("authorized");
+						return;
+					}
+				}
+			}
+			if (commentId != 0) {
+				Comment comment = commentService.retrieveComment(commentId);
+				if (comment != null) {
+					if (user.getUid().compareTo(comment.getCreator().getUid()) == 0) {
+						request.setAttribute("authorized", true);
+						System.out.println("authorized");
+						return;
+					}
+				}
+			}
+			
 			if (username != null) {
 				if (user.getUsername().equals(username)) {
 					request.setAttribute("authorized", true);
@@ -75,7 +127,7 @@ public class AuthenticationInterceptor {
 				}
 			}
 			if (adminName != null) {
-				if (user.getUsername().equals(adminName) && user.getUtype().compareTo(2)==0) {
+				if (user.getUsername().equals(adminName) && user.getUtype().compareTo(2) == 0) {
 					request.setAttribute("isAdmin", true);
 					System.out.println("isAdmin");
 					return;

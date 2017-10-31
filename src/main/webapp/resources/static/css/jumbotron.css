@@ -98,3 +98,10 @@ body {
 .search-result-item {
 	font-size:18px;
 }
+
+/* Event Comment */
+.rating {
+	font-size:12px;
+	width: 200px;
+	align:"center";
+}

@@ -43,6 +43,7 @@
 				            <div class="dropdown-menu" aria-labelledby="dropdown01">
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_account.path"/>">My Account Home</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_bookings.path"/>?username=${user.username}">My Bookings</a>
+				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_followings.path"/>?username=${user.username}">My Followings</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_posts.path"/>?username=${user.username}">My Posts</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_post_event.path"/>">Post an Event</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_logout.path"/>">Log out</a>
@@ -111,14 +112,6 @@
 							<tr class="user-info">
 								<td colspan="2"><b>Contact Details:</b></td>
 							</tr>
-							<tr hidden="true">
-								<td>UID:</td>
-								<td><form:input path="uid" value="${user.uid}"/></td>
-							</tr>
-							<tr hidden="true">
-								<td>EID:</td>
-								<td><form:input path="eid" value="${event.eid}"/></td>
-							</tr>
 							<tr class="user-info">
 								<td width="200px">Firstname:</td>
 								<td>${user.firstName}</td>
@@ -142,7 +135,7 @@
 							<tr height="10px">
 							</tr>
 							<tr class="user-info">
-								<td><button type="submit" >Confirm</button>&nbsp&nbsp<button type="reset" >Cancel </button></td>
+								<td><button type="submit" >Confirm</button>&nbsp&nbsp<button type="reset" onClick="javascript:history.back(-1);">Cancel</button></td>
 							</tr>
 						</table>
 						</form:form>

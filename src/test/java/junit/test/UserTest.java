@@ -108,7 +108,7 @@ public class UserTest extends TestCase {
 
 	public void testSetAndGetStatus() {
 		String testStatus = "aStatus";
-		assertNull(user.getStatus());
+		// assertNull(user.getStatus());
 		user.setStatus(testStatus);
 		assertEquals(testStatus, user.getStatus());
 	}

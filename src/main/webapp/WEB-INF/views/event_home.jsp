@@ -43,6 +43,7 @@
 				            <div class="dropdown-menu" aria-labelledby="dropdown01">
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_account.path"/>">My Account Home</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_bookings.path"/>?username=${user.username}">My Bookings</a>
+				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_followings.path"/>?username=${user.username}">My Followings</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_posts.path"/>?username=${user.username}">My Posts</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_post_event.path"/>">Post an Event</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_logout.path"/>">Log out</a>
@@ -96,7 +97,19 @@
 				                <!-- <td>Event Name:</td> -->
 				                <td colspan="2"><h1 id="event-name">${event.eventName}</h1></td>
 				            </tr>
-				            <tr height="60">
+				            <tr height="10">
+				            </tr>
+				            <tr class="event-info">
+				            	<c:choose>
+									<c:when test="${positiveRate == null}">
+										<td>No Feedback Yet</td>
+									</c:when>
+									<c:otherwise>
+				            			<td><a href="./event/comments?eventId=${event.eid}">${positiveRate}% Positive Feedback</a></td>
+				            		</c:otherwise>
+				            	</c:choose>
+				            </tr>
+				            <tr height="20">
 				            </tr>
 				            <tr class="event-info">
 				                <td><span class="event-field">Location:</span>&nbsp&nbsp${event.location}</td>
@@ -127,7 +140,7 @@
 			      				</c:when>
 			      				<c:otherwise>
 			      				<tr class="event-info">
-			      					<td align="left"><a href="./booking/make?eventId=${event.eid}"><Button type="button">&nbspBook&nbsp</Button></a>&nbsp&nbsp<a href=""><Button type="button">Follow</Button></a></td>
+			      					<td align="left"><a href="./booking/make?eventId=${event.eid}"><Button type="button">&nbspBook&nbsp</Button></a>&nbsp&nbsp<a href="./following/make?eventId=${event.eid}"><Button type="button">Follow</Button></a></td>
 			      				</tr>
 			      				</c:otherwise>
 			      			</c:choose>

@@ -99,11 +99,6 @@ public class EventServiceImpl implements EventService {
 		return eventDao.getEvent(event.getEid()) != null;
 	}
 
-	// @Override
-	// public Event retrieveEvent(User creator, String eventName) {
-	// return eventDao.getEvent(creator, eventName);
-	// }
-
 	@Override
 	public Event retrieveEvent(int eventId) {
 		return eventDao.getEvent(eventId);
@@ -133,7 +128,7 @@ public class EventServiceImpl implements EventService {
 	public List<EventVO> retrieveEventsByKeyword(String keyword) throws Exception {
 		List<EventVO> result = new ArrayList<EventVO>();
 		List<EventVO> list = getAllEventList();
-		for (Iterator<EventVO> iterator=list.iterator(); iterator.hasNext();) {
+		for (Iterator<EventVO> iterator = list.iterator(); iterator.hasNext();) {
 			EventVO e = iterator.next();
 			if (e.getEventName().contains(keyword) || e.getLocation().contains(keyword)) {
 				result.add(e);

@@ -30,7 +30,7 @@
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                	<li><a href="${pageContext.request.contextPath}/admin/user-mgmt?adminName=${user.username}">User Management</a></li>
+                	<li><a href="./admin/user-mgmt?adminName=${user.username}">User Management</a></li>
                 </ul>
             </li>
             <li class="dropdown">
@@ -39,7 +39,7 @@
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="${pageContext.request.contextPath}/admin/event-mgmt?adminName=${user.username}">Event Management</a></li>
+                    <li><a href="./admin/event-mgmt?adminName=${user.username}">Event Management</a></li>
                 </ul>
             </li>
             <li class="dropdown">
@@ -48,7 +48,7 @@
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                	<li><a href="${pageContext.request.contextPath}/category/home?adminName=${user.username}">Category Management</a></li>
+                	<li><a href="./category/home?adminName=${user.username}">Category Management</a></li>
                 </ul>
             </li>
             <li class="dropdown">
@@ -57,7 +57,7 @@
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="${pageContext.request.contextPath}/admin/log-list?adminName=${user.username}">Log List</a></li>
+                    <li><a href="./admin/log-list?adminName=${user.username}">Log List</a></li>
                 </ul>
             </li>
         </ul>
@@ -69,7 +69,6 @@
 	<div align="left">
 	
 	</div>
-	</br>
 	<table id="table_id" class="table table-bordered table-hover table-striped">
 		<thead>
 			<tr>
@@ -97,7 +96,7 @@
 			"processing":true,
 			/* "serverSide":true, */
 			"ajax":{
-				"url":"${pageContext.request.contextPath}/admin/getLogList",
+				"url":"./admin/getLogList",
 				"dataSrc": function(data) {
 					if (data == null) {
 						return "";
@@ -107,7 +106,7 @@
 				},
 				"error": function(XMLHttpRequest, textStatus, errorThrown) {
 					console.log("p1: " + textStatus);
-					alert("Network issues!");
+					alert("Network shaking, please wait for a moment!");
 				}
 			},
 			"columns":[

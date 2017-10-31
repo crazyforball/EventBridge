@@ -1,7 +1,10 @@
 package com.emsrepo.domain;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,9 +13,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.emsrepo.utils.DateTimeUtil;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "t_event")
@@ -34,14 +39,6 @@ public class Event implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "eid")
 	private int eid;
-
-	@Override
-	public String toString() {
-		return "Event [eid=" + eid + ", eventName=" + eventName + ", description=" + description + ", location="
-				+ location + ", startDate=" + startDate + ", endDate=" + endDate + ", status=" + status + ", capacity="
-				+ capacity + ", fees=" + fees + ", imageUrl=" + imageUrl + ", audioUrl=" + audioUrl + ", category="
-				+ category + "]";
-	}
 
 	@Column(name = "eventname", nullable = false)
 	private String eventName;
@@ -76,23 +73,24 @@ public class Event implements Serializable {
 	@Column(name = "category")
 	private String category;
 
-	// @OneToOne(fetch = FetchType.EAGER)
-	// @JoinColumn(name = "cid")
-	// private Category category;
+	@Column(name = "createdate")
+	private String createDate;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "uid")
 	private User creator;
 
-	// @Temporal(TemporalType.TIMESTAMP)
-	// @Column(name = "createDate")
-	// private Date createDate;
+	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL }, mappedBy = "event")
+	@JsonIgnore
+	private Set<Booking> relatedBookings = new HashSet<>();
 
-	private String createDate;
+	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL }, mappedBy = "event")
+	@JsonIgnore
+	private Set<Following> relatedFollowings = new HashSet<>();
 
-	// @JsonIgnore
-	// @ManyToMany(mappedBy = "bookedEvents")
-	// private Set<User> bookingUsers;
+	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL }, mappedBy = "event")
+	@JsonIgnore
+	private Set<Comment> relatedComments = new HashSet<>();
 
 	public int getEid() {
 		return eid;
@@ -190,13 +188,13 @@ public class Event implements Serializable {
 		this.category = category;
 	}
 
-	// public Category getCategory() {
-	// return category;
-	// }
-	//
-	// public void setCategory(Category category) {
-	// this.category = category;
-	// }
+	public String getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
+	}
 
 	public User getCreator() {
 		return creator;
@@ -206,28 +204,36 @@ public class Event implements Serializable {
 		this.creator = creator;
 	}
 
-	public String getCreateDate() {
-		return createDate;
+	public Set<Booking> getRelatedBookings() {
+		return relatedBookings;
 	}
 
-	public void setCreateDate(String createDate) {
-		this.createDate = createDate;
+	public void setRelatedBookings(Set<Booking> relatedBookings) {
+		this.relatedBookings = relatedBookings;
 	}
 
-	// public Date getCreateDate() {
-	// return createDate;
-	// }
-	//
-	// public void setCreateDate(Date createDate) {
-	// this.createDate = createDate;
-	// }
+	public Set<Following> getRelatedFollowings() {
+		return relatedFollowings;
+	}
 
-	// public Set<User> getBookingUsers() {
-	// return bookingUsers;
-	// }
-	//
-	// public void setBookingUsers(Set<User> bookingUsers) {
-	// this.bookingUsers = bookingUsers;
-	// }
+	public void setRelatedFollowings(Set<Following> relatedFollowings) {
+		this.relatedFollowings = relatedFollowings;
+	}
+
+	public Set<Comment> getRelatedComments() {
+		return relatedComments;
+	}
+
+	public void setRelatedComments(Set<Comment> relatedComments) {
+		this.relatedComments = relatedComments;
+	}
+
+	@Override
+	public String toString() {
+		return "Event [eid=" + eid + ", eventName=" + eventName + ", description=" + description + ", location="
+				+ location + ", startDate=" + startDate + ", endDate=" + endDate + ", status=" + status + ", capacity="
+				+ capacity + ", fees=" + fees + ", imageUrl=" + imageUrl + ", audioUrl=" + audioUrl + ", category="
+				+ category + "]";
+	}
 
 }

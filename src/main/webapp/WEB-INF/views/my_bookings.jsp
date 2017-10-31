@@ -43,6 +43,7 @@
 				            <div class="dropdown-menu" aria-labelledby="dropdown01">
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_account.path"/>">My Account Home</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_bookings.path"/>?username=${user.username}">My Bookings</a>
+				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_followings.path"/>?username=${user.username}">My Followings</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_posts.path"/>?username=${user.username}">My Posts</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_post_event.path"/>">Post an Event</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_logout.path"/>">Log out</a>
@@ -84,15 +85,15 @@
 									<th>Action</th>
 								</tr>
 							</thead>
-				            <c:forEach items="${bookingEventPairs}" var="bookingEventPair">
+				            <c:forEach items="${bookings}" var="booking">
 				            	<tr>
-				            		<td>${bookingEventPair.booking.bid}</td>
-				            		<td>${bookingEventPair.booking.bookingDate}</td>
-				            		<td>${bookingEventPair.event.eventName}</td>
-				            		<td>${bookingEventPair.event.startDate}</td>
-				            		<td>${bookingEventPair.event.endDate}</td>
-				            		<td>${bookingEventPair.event.location}</td>
-				            		<td><a href="./event/home?eventId=${bookingEventPair.event.eid}"><button type="button">&nbspView&nbsp</button></a>&nbsp&nbsp<a href="./booking/cancel?bookingId=${bookingEventPair.booking.bid}"><button type="button">Cancel</button></a></td>
+				            		<td>${booking.bid}</td>
+				            		<td>${booking.bookingDate}</td>
+				            		<td>${booking.event.eventName}</td>
+				            		<td>${booking.event.startDate}</td>
+				            		<td>${booking.event.endDate}</td>
+				            		<td>${booking.event.location}</td>
+				            		<td><a href="./event/home?eventId=${booking.event.eid}"><button type="button">&nbspView&nbsp</button></a>&nbsp&nbsp<c:choose><c:when test="${booking.event.status == 'FINISHED'}"><a href="./comment/make?eventId=${booking.event.eid}"><button type="button">Comment</button></a></c:when><c:otherwise><a href="./booking/cancel?bookingId=${booking.bid}"><button type="button">Cancel</button></a></c:otherwise></c:choose></td>
 				            	</tr>
 				            </c:forEach>
 				            <tr height="50px">

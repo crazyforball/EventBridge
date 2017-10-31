@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import com.emsrepo.dao.LoggerDao;
@@ -18,6 +19,7 @@ public class LoggerServiceImpl implements LoggerService {
 	private LoggerDao loggerDao;
 	
 	@Override
+	@Transactional
 	public List<Logger> getLoggerDetailList() {
 		List<Logger> voList = new ArrayList<>();
 		voList = loggerDao.getAllLoggerList();

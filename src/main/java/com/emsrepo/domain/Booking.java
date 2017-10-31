@@ -4,15 +4,19 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import com.emsrepo.utils.DateTimeUtil;
 
 @Entity
-@Table(name = "t_booking")
+@Table(name = "t_booking", uniqueConstraints = { @UniqueConstraint(columnNames = { "uid", "eid" }) })
 public class Booking implements Serializable {
 
 	/**
@@ -31,16 +35,15 @@ public class Booking implements Serializable {
 	@Column(name = "bid")
 	private Integer bid;
 
-	@Column(name = "uid")
-	private Integer uid;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "uid")
+	private User creator;
 
-	@Column(name = "eid")
-	private Integer eid;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "eid")
+	private Event event;
 
-	// @Temporal(TemporalType.TIMESTAMP)
-	// @Column(name = "bookingDate")
-	// private Date bookingDate;
-
+	@Column(name = "bookingdate")
 	private String bookingDate;
 
 	public Integer getBid() {
@@ -51,29 +54,21 @@ public class Booking implements Serializable {
 		this.bid = bid;
 	}
 
-	public Integer getUid() {
-		return uid;
+	public User getCreator() {
+		return creator;
 	}
 
-	public void setUid(Integer uid) {
-		this.uid = uid;
+	public void setCreator(User creator) {
+		this.creator = creator;
 	}
 
-	public Integer getEid() {
-		return eid;
+	public Event getEvent() {
+		return event;
 	}
 
-	public void setEid(Integer eid) {
-		this.eid = eid;
+	public void setEvent(Event event) {
+		this.event = event;
 	}
-
-	// public Date getBookingDate() {
-	// return bookingDate;
-	// }
-	//
-	// public void setBookingDate(Date bookingDate) {
-	// this.bookingDate = bookingDate;
-	// }
 
 	public String getBookingDate() {
 		return bookingDate;
@@ -85,6 +80,6 @@ public class Booking implements Serializable {
 
 	@Override
 	public String toString() {
-		return "bid:" + bid + " uid:" + uid + " eid:" + eid + " bookingDate:" + bookingDate;
+		return "bid:" + bid + " uid:" + creator.getUid() + " eid:" + event.getEid() + " bookingDate:" + bookingDate;
 	}
 }

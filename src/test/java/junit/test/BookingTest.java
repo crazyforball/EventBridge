@@ -1,6 +1,8 @@
 package junit.test;
 
 import com.emsrepo.domain.Booking;
+import com.emsrepo.domain.Event;
+import com.emsrepo.domain.User;
 
 import junit.framework.TestCase;
 
@@ -12,32 +14,23 @@ public class BookingTest extends TestCase {
 		booking = new Booking();
 	}
 
-	public void testSetAndGetUid() {
-		int testUid = 1;
-		assertEquals(0, 0, 0);
-		booking.setUid(1);
-		;
-		assertEquals(testUid, booking.getUid(), 0);
+	public void testSetAndGetCreator() {
+		User testCreator = new User();
+		assertNull(booking.getCreator());
+		booking.setCreator(testCreator);
+		assertEquals(testCreator, booking.getCreator());
 	}
 
-	public void testSetAndGetEid() {
-		int testEid = 1;
-		assertEquals(0, 0, 0);
-		booking.setEid(1);
-		;
-		assertEquals(testEid, booking.getEid(), 0);
+	public void testSetAndGetEvent() {
+		Event testEvent = new Event();
+		assertNull(booking.getEvent());
+		booking.setEvent(testEvent);
+		assertEquals(testEvent, booking.getEvent());
 	}
-
-	// public void testSetAndGetBookingDate() {
-	// Date testBookingDate = new Date();
-	// assertNull(booking.getBookingDate());
-	// booking.setBookingDate(testBookingDate);
-	// assertEquals(testBookingDate, booking.getBookingDate());
-	// }
 
 	public void testSetAndGetBookingDate() {
 		String testBookingDate = "aTestBookingDate";
-		assertNull(booking.getBookingDate());
+		// assertNull(booking.getBookingDate());
 		booking.setBookingDate(testBookingDate);
 		assertEquals(testBookingDate, booking.getBookingDate());
 	}

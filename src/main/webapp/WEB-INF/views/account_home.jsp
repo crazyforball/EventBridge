@@ -46,6 +46,7 @@
 				            <div class="dropdown-menu" aria-labelledby="dropdown01">
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_account.path"/>">My Account Home</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_bookings.path"/>?username=${user.username}">My Bookings</a>
+				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_followings.path"/>?username=${user.username}">My Followings</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_posts.path"/>?username=${user.username}">My Posts</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_post_event.path"/>">Post an Event</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_logout.path"/>">Log out</a>
@@ -79,10 +80,10 @@
 							<div class="link"><i class="fa fa-chevron-down"></i>Admin Center</div>
 							<ul class="submenu">
 								<li><a href="./admin?adminName=${user.username}">Admin Home</a></li>
-								<li><a href="${pageContext.request.contextPath}/admin/user-mgmt?adminName=${user.username}">User Management</a></li>
-								<li><a href="${pageContext.request.contextPath}/admin/event-mgmt?adminName=${user.username}">Event Management</a></li>
-								<li><a href="${pageContext.request.contextPath}/category/home?adminName=${user.username}">Category Management</a></li>
-								<li><a href="${pageContext.request.contextPath}/admin/log-list?adminName=${user.username}">Log List</a></li>
+								<li><a href="./admin/user-mgmt?adminName=${user.username}">User Management</a></li>
+								<li><a href="./admin/event-mgmt?adminName=${user.username}">Event Management</a></li>
+								<li><a href="./category/home?adminName=${user.username}">Category Management</a></li>
+								<li><a href="./admin/log-list?adminName=${user.username}">Log List</a></li>
 							</ul>
 						</li>
 					</c:when>
@@ -99,7 +100,8 @@
 						<ul class="submenu">
 							<li><a href="./booking/home?username=${user.username}">My Bookings</a></li>
 							<li><a href="./event/myPosts?username=${user.username}">My Posts</a></li>
-							<li><a href="#">My Followings</a></li>
+							<li><a href="./following/home?username=${user.username}">My Followings</a></li>
+							<li><a href="./comment/home?username=${user.username}">My Comments</a></li>
 							<li><a href="./event/post">Post an Event</a></li>
 						</ul>
 					</li>

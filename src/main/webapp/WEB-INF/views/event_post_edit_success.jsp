@@ -43,6 +43,7 @@
 				            <div class="dropdown-menu" aria-labelledby="dropdown01">
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_account.path"/>">My Account Home</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_bookings.path"/>?username=${user.username}">My Bookings</a>
+				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_followings.path"/>?username=${user.username}">My Followings</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_posts.path"/>?username=${user.username}">My Posts</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_post_event.path"/>">Post an Event</a>
 				              <a class="dropdown-item" href="<fmt:message key="nav_dropdown_logout.path"/>">Log out</a>
@@ -79,10 +80,10 @@
 				            <tr height="50px">
 				            </tr>
 				            <tr height="30px">
-				          		<td><a href="./event/media/upload?eventId=${eventId}">Add Media Files for My Event.</a></td>
+				          		<td align="center"><a href="./event/media/upload?eventId=${eventId}">Add Media Files for My Event.</a></td>
 				          	</tr>
 				          	<tr height="30px">
-				          		<td><a href="./event/home?eventId=${eventId}">Go to My Event Home.</a>
+				          		<td align="center"><a href="./event/home?eventId=${eventId}">Go to My Event Home.</a>
 				          	</tr>
 				          	<tr height="30px">
 				          		<td align="center"><a href="./">Go to Event Bridge Home.</a>

@@ -13,6 +13,8 @@ import org.springframework.stereotype.Repository;
 
 import com.emsrepo.dao.BookingDao;
 import com.emsrepo.domain.Booking;
+import com.emsrepo.domain.Event;
+import com.emsrepo.domain.User;
 
 @SuppressWarnings("deprecation")
 @Repository
@@ -39,14 +41,14 @@ public class BookingDaoImpl implements BookingDao {
 	}
 
 	@Override
-	public Booking getBooking(int uid, int eid) {
+	public Booking getBooking(User creator, Event event) {
 		Session session = null;
 		Booking booking = null;
 
 		try {
 			session = getSession();
 			Criteria criteria = session.createCriteria(Booking.class);
-			criteria.add(Expression.like("uid", uid)).add(Expression.like("eid", eid));
+			criteria.add(Expression.like("creator", creator)).add(Expression.like("event", event));
 			booking = (Booking) criteria.uniqueResult();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -77,14 +79,14 @@ public class BookingDaoImpl implements BookingDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Booking> getBookings(int uid) {
+	public List<Booking> getBookings(User creator) {
 		Session session = null;
 		List<Booking> list = new ArrayList<>();
 
 		try {
 			session = getSession();
 			Criteria criteria = session.createCriteria(Booking.class);
-			criteria.add(Expression.like("uid", uid)).addOrder(Order.desc("bookingDate"));
+			criteria.add(Expression.like("creator", creator)).addOrder(Order.desc("bookingDate"));
 			list = (List<Booking>) criteria.list();
 		} catch (Exception e) {
 			e.printStackTrace();

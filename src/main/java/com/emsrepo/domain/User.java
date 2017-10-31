@@ -58,9 +58,6 @@ public class User implements Serializable {
 	@Column(name = "email")
 	private String email;
 
-	// @Column(name="DOB")
-	// private Date DOB;
-
 	@Column(name = "DOB")
 	private String DOB;
 
@@ -80,12 +77,17 @@ public class User implements Serializable {
 	@JsonIgnore
 	private Set<Event> createdEvents = new HashSet<>();
 
-	// @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-	// @JoinTable(name = "t_booking", joinColumns = {
-	// @JoinColumn(name = "uid", referencedColumnName = "uid") },
-	// inverseJoinColumns = {
-	// @JoinColumn(name = "eid", referencedColumnName = "eid") })
-	// private Set<Event> bookedEvents;
+	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL }, mappedBy = "creator")
+	@JsonIgnore
+	private Set<Booking> createdBookings = new HashSet<>();
+
+	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL }, mappedBy = "creator")
+	@JsonIgnore
+	private Set<Following> createdFollowings = new HashSet<>();
+
+	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL }, mappedBy = "creator")
+	@JsonIgnore
+	private Set<Comment> createdComments = new HashSet<>();
 
 	public Integer getUid() {
 		return uid;
@@ -151,14 +153,6 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
-	// public Date getDOB() {
-	// return DOB;
-	// }
-	//
-	// public void setDOB(Date dOB) {
-	// DOB = dOB;
-	// }
-
 	public String getDOB() {
 		return DOB;
 	}
@@ -207,13 +201,29 @@ public class User implements Serializable {
 		this.createdEvents = createdEvents;
 	}
 
-	// public Set<Event> getBookedEvents() {
-	// return bookedEvents;
-	// }
-	//
-	// public void setBookedEvents(Set<Event> bookedEvents) {
-	// this.bookedEvents = bookedEvents;
-	// }
+	public Set<Booking> getCreatedBookings() {
+		return createdBookings;
+	}
+
+	public void setCreatedBookings(Set<Booking> createdBookings) {
+		this.createdBookings = createdBookings;
+	}
+
+	public Set<Following> getCreatedFollowings() {
+		return createdFollowings;
+	}
+
+	public void setCreatedFollowings(Set<Following> createdFollowings) {
+		this.createdFollowings = createdFollowings;
+	}
+
+	public Set<Comment> getCreatedComments() {
+		return createdComments;
+	}
+
+	public void setCreatedComments(Set<Comment> createdComments) {
+		this.createdComments = createdComments;
+	}
 
 	@Override
 	public String toString() {

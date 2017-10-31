@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.emsrepo.dao.BookingDao;
 import com.emsrepo.domain.Booking;
+import com.emsrepo.domain.Event;
+import com.emsrepo.domain.User;
 import com.emsrepo.service.BookingService;
 
 @Service("bookingService")
@@ -15,12 +17,8 @@ public class BookingServiceImpl implements BookingService {
 	@Autowired
 	private BookingDao bookingDao;
 
-	// business logic of registering a Person into the database
 	@Override
 	public boolean registerBooking(Booking booking) {
-
-		// Step 1: check whether this person is already in the database
-		// Step 2: if not, save this person into the database
 		if (!isExistingBooking(booking)) {
 			bookingDao.saveBooking(booking);
 			return true;
@@ -30,22 +28,22 @@ public class BookingServiceImpl implements BookingService {
 
 	@Override
 	public boolean isExistingBooking(Booking booking) {
-		return bookingDao.getBooking(booking.getUid(), booking.getEid()) != null;
+		return bookingDao.getBooking(booking.getCreator(), booking.getEvent()) != null;
 	}
-	
+
 	@Override
 	public Booking retrieveBooking(int bid) {
 		return bookingDao.getBooking(bid);
 	}
 
 	@Override
-	public Booking retrieveBooking(int uid, int eid) {
-		return bookingDao.getBooking(uid, eid);
+	public Booking retrieveBooking(User creator, Event event) {
+		return bookingDao.getBooking(creator, event);
 	}
 
 	@Override
-	public List<Booking> retrieveBookings(int uid) {
-		return bookingDao.getBookings(uid);
+	public List<Booking> retrieveBookings(User creator) {
+		return bookingDao.getBookings(creator);
 	}
 
 	@Override

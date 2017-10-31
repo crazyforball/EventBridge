@@ -17,7 +17,6 @@ import org.springframework.stereotype.Repository;
 
 import com.emsrepo.dao.EventDao;
 import com.emsrepo.domain.Event;
-import com.emsrepo.domain.User;
 
 @SuppressWarnings("deprecation")
 @Repository
@@ -94,25 +93,6 @@ public class EventDaoImpl implements EventDao {
 		}
 	}
 
-//	@Override
-//	public Event getEvent(User creator, String eventName) {
-//		Session session = null;
-//		Event event = null;
-//
-//		try {
-//			session = getSession();
-//			Criteria criteria = session.createCriteria(Event.class);
-//			criteria.add(Expression.like("creator", creator)).add(Expression.like("eventName", eventName));
-//			event = (Event) criteria.uniqueResult();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		} finally {
-//			session.close();
-//		}
-//
-//		return event;
-//	}
-
 	@Override
 	public Event getEvent(int eid) {
 		Session session = null;
@@ -187,7 +167,7 @@ public class EventDaoImpl implements EventDao {
 
 	@Override
 	public void updateEvent(Event oldEvent, Event newEvent) {
-		
+
 		if (newEvent.getImageUrl() == null && newEvent.getAudioUrl() == null) {
 			oldEvent.setEventName(newEvent.getEventName());
 			oldEvent.setLocation(newEvent.getLocation());
@@ -205,7 +185,7 @@ public class EventDaoImpl implements EventDao {
 				oldEvent.setAudioUrl(newEvent.getAudioUrl());
 			}
 		}
-		
+
 		Session session = null;
 		try {
 			session = getSession();
