@@ -75,32 +75,31 @@
 				 	<tr>
 		                <td colspan="2" align="center"><h2>${category}</h2></td>
 		          	</tr>
-		          	<c:forEach items="${events}" var="event">
-						<tr>
-							<td>
-								<table>
-						        	<tr>
-						        		<td><a href="./event/home?eventId=${event.eid}"><img alt="${event.imageUrl}" src="${basePath}${event.imageUrl}" width="400" height="300"></a></td>
-						        	</tr>
-							    	<tr>
-										<td>Event Name: ${event.eventName}</td>
-									</tr>
-									<tr>
-										<td>Event Description: ${event.description}</td>
-									</tr>
-								</table>
-							</td>
-						</tr>
-						<tr>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-						</tr>
-					</c:forEach>
+		          	<tr height="10px">
+					</tr>
+	          		<c:forEach items="${events}" var="event">
+							<tr>
+								<td align="center">
+									<table align="center">
+							        	<tr align="center">
+							        		<td align="center"><a href="./event/home?eventId=${event.eid}"><img alt="${event.imageUrl}" src="${basePath}${event.imageUrl}" width="400" height="300"></a></td>
+							        	</tr>
+							        	<tr height="10px">
+							        	</tr>
+								    	<tr align="left">
+											<td width="200px"><span class="event-detail">Event Name:</span> ${event.eventName}</td>
+										</tr>
+										<tr height="10px">
+							        	</tr>
+										<tr align="left">
+											<td width="200px"><span class="event-detail">Description:</span> ${event.description}</td>
+										</tr>
+										<tr height="50px">
+							        	</tr>
+										</table>
+									</td>
+								</tr>
+						</c:forEach>
 				</table>
 		    </div>
 		</div>    

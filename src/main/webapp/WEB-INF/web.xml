@@ -18,7 +18,6 @@
     <dispatcher>REQUEST</dispatcher>
     <dispatcher>FORWARD</dispatcher>
   </filter-mapping>
-  
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>/WEB-INF/spring/root-context.xml,/WEB-INF/spring/spring-hibernate.xml,/WEB-INF/spring/spring-service.xml</param-value>
@@ -39,5 +38,4 @@
     <servlet-name>appServlet</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
-  
 </web-app>

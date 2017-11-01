@@ -19,7 +19,8 @@ public class Logger implements Serializable{
 	private static final long serialVersionUID = 7798216169253646015L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+//	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="logid")
 	private int logid;
 	

@@ -78,7 +78,7 @@
 						<td><h2><fmt:message key="event_post.heading"/></h2></td>
 					</tr>
 					<tr class="event-post-info">
-						<td width="300px">Event name:</td>
+						<td width="200px">Event name:</td>
 						<td><form:input path="eventName" required="true" size="25"/></td>
 					</tr>
 					<tr class="event-post-info">
@@ -86,12 +86,12 @@
 						<td><form:input path="location" required="true" size="25"/></td>
 					</tr>
 					<tr class="event-post-info">
-						<td>Start Date (YYYY-MM-DD hh:mm):</td>
+						<td>Start Date:</td>
 						<td><form:input path="startDate" placeholder="YYYY-MM-DD hh:mm" required="true" size="25"/></td>
 					</tr>
 					<tr class="event-post-info">
-						<td>End Date (YYYY-MM-DD hh:mm):</td>
-						<td><form:input path="endDate" required="true" size="25"/></td>
+						<td>End Date:</td>
+						<td><form:input path="endDate" placeholder="YYYY-MM-DD hh:mm" required="true" size="25"/></td>
 					</tr>
 					<tr class="event-post-info">
 						<td>Capacity:</td>

@@ -30,7 +30,7 @@ public class Event implements Serializable {
 
 	public Event() {
 		super();
-		this.status = "PASS";
+		this.status = "APPROVED";
 		this.createDate = DateTimeUtil.getNowadayTime();
 	}
 

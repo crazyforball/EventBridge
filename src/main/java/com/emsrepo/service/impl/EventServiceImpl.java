@@ -35,6 +35,7 @@ public class EventServiceImpl implements EventService {
 		List<Event> eventList = new ArrayList<>();
 		eventList = eventDao.getAllEventList();
 		if (CollectionUtils.isNotEmpty(eventList)) {
+			System.out.println(eventList.size());
 			for (Event event : eventList) {
 				if (event != null) {
 					EventVO vo = convertToEventVO(event);
@@ -130,6 +131,7 @@ public class EventServiceImpl implements EventService {
 		List<EventVO> list = getAllEventList();
 		for (Iterator<EventVO> iterator = list.iterator(); iterator.hasNext();) {
 			EventVO e = iterator.next();
+			System.out.println(e);
 			if (e.getEventName().contains(keyword) || e.getLocation().contains(keyword)) {
 				result.add(e);
 			}

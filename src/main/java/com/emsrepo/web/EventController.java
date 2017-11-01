@@ -26,6 +26,7 @@ import com.emsrepo.service.CommentService;
 import com.emsrepo.service.EventService;
 import com.emsrepo.service.UserService;
 import com.emsrepo.utils.RatingUtil;
+import com.emsrepo.vo.EventVO;
 
 @Controller
 @RequestMapping(value = "/event")
@@ -268,7 +269,9 @@ public class EventController {
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String search(@RequestParam("keyword") String keyword, HttpServletRequest request) throws Exception {
 		System.out.println("start searching...");
-		request.setAttribute("events", eventService.retrieveEventsByKeyword(keyword));
+		List<EventVO> events = eventService.retrieveEventsByKeyword(keyword);
+		System.out.println("num of results: " + events.size());
+		request.setAttribute("events", events);
 		return "search_result";
 	}
 

@@ -98,8 +98,8 @@
 						<td>&nbsp<form:radiobutton path="gender" value="0"/>&nbsp&nbspMale&nbsp&nbsp<form:radiobutton path="gender" value="1"/>&nbsp&nbspFemale</td>
 					</tr>
 					<tr class="user-info">
-						<td>DOB (YYYY-MM-DD):</td>
-						<td><form:input path="DOB" required="true"/></td>
+						<td>DOB:</td>
+						<td><form:input path="DOB"  placeholder="YYYY-MM-DD" required="true"/></td>
 					</tr>
 					<tr class="user-info">
 						<td>Phone:</td>

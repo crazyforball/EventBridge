@@ -9,4 +9,6 @@ public interface LoggerDao {
 	public List<Logger> getAllLoggerList();
 	
 	public void addLog(Logger log);
+
+	public void saveLog(Logger log);
 }

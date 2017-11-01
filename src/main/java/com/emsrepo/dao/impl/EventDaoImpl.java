@@ -86,6 +86,7 @@ public class EventDaoImpl implements EventDao {
 		try {
 			session = getSession();
 			session.save(event);
+//			session.flush();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

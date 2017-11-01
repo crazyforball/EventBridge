@@ -1,6 +1,7 @@
 package com.emsrepo.web;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.emsrepo.domain.Logger;
+import com.emsrepo.domain.User;
 import com.emsrepo.service.EventService;
 import com.emsrepo.service.LoggerService;
 import com.emsrepo.service.UserService;
+import com.emsrepo.utils.DateTimeUtil;
 import com.emsrepo.vo.EventVO;
 import com.emsrepo.vo.MsgVO;
 import com.emsrepo.vo.UserVO;
@@ -55,17 +58,11 @@ public class AdminController {
 	@RequestMapping(value = "/admin/{uid}", method = RequestMethod.GET)
 	@ResponseBody
 	public String getAdminUserById(@PathVariable Integer uid, HttpServletRequest request) throws Exception {
-//		if ((Boolean) request.getAttribute("hasLoggedIn")) {
-//			if ((Boolean) request.getAttribute("isAdmin")) {
-				UserVO admin = userService.getUserVOById(uid);
-				ObjectMapper mapper = new ObjectMapper();
-				String json = "";
-				json = mapper.writeValueAsString(admin);
-				return json;
-//			}
-//			return null;
-//		}
-//		return "user_login";
+		UserVO admin = userService.getUserVOById(uid);
+		ObjectMapper mapper = new ObjectMapper();
+		String json = "";
+		json = mapper.writeValueAsString(admin);
+		return json;
 	}
 
 	@RequestMapping("/admin/user-mgmt")
@@ -82,23 +79,17 @@ public class AdminController {
 	@RequestMapping(value = "/admin/getUserList", method = RequestMethod.GET)
 	@ResponseBody
 	public String getUserVOList(Model model, HttpServletRequest request) throws Exception {
-//		if ((Boolean) request.getAttribute("hasLoggedIn")) {
-//			if ((Boolean) request.getAttribute("isAdmin")) {
-				List<UserVO> userList = userService.getGeneralUserVOList();
-				ObjectMapper mapper = new ObjectMapper();
-				String json = "";
-				json = mapper.writeValueAsString(userList);
-				return json;
-//			}
-//			return null;
-//		}
-//		return "user_login";
+		List<UserVO> userList = userService.getGeneralUserVOList();
+		ObjectMapper mapper = new ObjectMapper();
+		String json = "";
+		json = mapper.writeValueAsString(userList);
+		return json;
 	}
 
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/admin/denyUserStatus", method = RequestMethod.POST)
 	@ResponseBody
-	public String denyUserStatus(@RequestBody String param) throws Exception {
+	public String denyUserStatus(@RequestBody String param, HttpServletRequest request) throws Exception {
 
 		ObjectMapper mapper = new ObjectMapper();
 		JavaType javaType = mapper.getTypeFactory().constructParametricType(ArrayList.class, Integer.class);
@@ -108,9 +99,22 @@ public class AdminController {
 
 		try {
 			if (CollectionUtils.isEmpty(uidList)) {
-
+				
 				System.out.println("--- AdminController updateUserStatus wrong parameters fail ---");
 			} else {
+				for (Iterator<Integer> iterator=uidList.iterator(); iterator.hasNext();) {
+					String uid = String.valueOf(iterator.next().intValue());
+					
+					Logger logger = new Logger();
+					logger.setLogDate(DateTimeUtil.getNowadayTime());
+					logger.setAdminId(((User) request.getSession().getAttribute("user")).getUid());
+					logger.setLogType("denyUserStatus");
+					logger.setUid(uid);
+					logger.setOpt("AdminController updateUserStatus successfully.");
+					
+					loggerService.addLog(logger);
+				}
+				
 				userService.batchUpdateUserStatus(uidList, "DENY");
 				status = "ok";
 			}
@@ -132,7 +136,7 @@ public class AdminController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/admin/passUserStatus", method = RequestMethod.POST)
 	@ResponseBody
-	public String passUserStatus(@RequestBody String param) throws Exception {
+	public String passUserStatus(@RequestBody String param, HttpServletRequest request) throws Exception {
 
 		ObjectMapper mapper = new ObjectMapper();
 		JavaType javaType = mapper.getTypeFactory().constructParametricType(ArrayList.class, Integer.class);
@@ -145,6 +149,19 @@ public class AdminController {
 
 				System.out.println("--- AdminController updateUserStatus wrong parameters fail ---");
 			} else {
+				for (Iterator<Integer> iterator=uidList.iterator(); iterator.hasNext();) {
+					String uid = String.valueOf(iterator.next().intValue());
+					
+					Logger logger = new Logger();
+					logger.setLogDate(DateTimeUtil.getNowadayTime());
+					logger.setAdminId(((User) request.getSession().getAttribute("user")).getUid());
+					logger.setLogType("passUserStatus");
+					logger.setUid(uid);
+					logger.setOpt("AdminController updateUserStatus successfully.");
+					
+					loggerService.addLog(logger);
+				}
+				
 				userService.batchUpdateUserStatus(uidList, "PASS");
 				status = "ok";
 			}
@@ -176,23 +193,17 @@ public class AdminController {
 	@RequestMapping(value = "/admin/getEventList", method = RequestMethod.GET)
 	@ResponseBody
 	public String getEventVOList(Model model, HttpServletRequest request) throws Exception {
-//		if ((Boolean) request.getAttribute("hasLoggedIn")) {
-//			if ((Boolean) request.getAttribute("isAdmin")) {
-				List<EventVO> voList = eventService.getAllEventList();
-				ObjectMapper mapper = new ObjectMapper();
-				String json = "";
-				json = mapper.writeValueAsString(voList);
-				return json;
-//			}
-//			return null;
-//		}
-//		return "user_login";
+		List<EventVO> voList = eventService.getAllEventList();
+		ObjectMapper mapper = new ObjectMapper();
+		String json = "";
+		json = mapper.writeValueAsString(voList);
+		return json;
 	}
 
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/admin/approveEvent", method = RequestMethod.POST)
 	@ResponseBody
-	public String approveEvent(@RequestBody String param) throws Exception {
+	public String approveEvent(@RequestBody String param, HttpServletRequest request) throws Exception {
 
 		ObjectMapper mapper = new ObjectMapper();
 		JavaType javaType = mapper.getTypeFactory().constructParametricType(ArrayList.class, Integer.class);
@@ -205,6 +216,19 @@ public class AdminController {
 
 				System.out.println("--- AdminController updateUserStatus wrong parameters fail ---");
 			} else {
+				for (Iterator<Integer> iterator=eidList.iterator(); iterator.hasNext();) {
+					String eid = String.valueOf(iterator.next().intValue());
+					
+					Logger logger = new Logger();
+					logger.setLogDate(DateTimeUtil.getNowadayTime());
+					logger.setAdminId(((User) request.getSession().getAttribute("user")).getUid());
+					logger.setLogType("approveEvent");
+					logger.setEid(eid);
+					logger.setOpt("AdminController approveEvent successfully.");
+					
+					loggerService.addLog(logger);
+				}
+				
 				eventService.batchUpdateEventStatus(eidList, "APPROVED");
 				status = "ok";
 			}
@@ -226,7 +250,7 @@ public class AdminController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/admin/denyEvent", method = RequestMethod.POST)
 	@ResponseBody
-	public String denyEvent(@RequestBody String param) throws Exception {
+	public String denyEvent(@RequestBody String param, HttpServletRequest request) throws Exception {
 
 		ObjectMapper mapper = new ObjectMapper();
 		JavaType javaType = mapper.getTypeFactory().constructParametricType(ArrayList.class, Integer.class);
@@ -239,6 +263,19 @@ public class AdminController {
 
 				System.out.println("--- AdminController updateUserStatus wrong parameters fail ---");
 			} else {
+				for (Iterator<Integer> iterator=eidList.iterator(); iterator.hasNext();) {
+					String eid = String.valueOf(iterator.next().intValue());
+					
+					Logger logger = new Logger();
+					logger.setLogDate(DateTimeUtil.getNowadayTime());
+					logger.setAdminId(((User) request.getSession().getAttribute("user")).getUid());
+					logger.setLogType("denyEvent");
+					logger.setEid(eid);
+					logger.setOpt("AdminController denyEvent successfully.");
+					
+					loggerService.addLog(logger);
+				}
+				
 				eventService.batchUpdateEventStatus(eidList, "DENIED");
 				status = "ok";
 			}

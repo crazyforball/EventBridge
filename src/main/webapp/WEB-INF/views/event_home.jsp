@@ -71,7 +71,8 @@
 	<div class="jumbotron">
 		<div class="container">
 			<div align="center">
-		
+			<c:choose>
+				<c:when test="${event.status == 'APPROVED'}">
 				<div class="flex-container">
 					<div class="flex-item">
 						<table id="event-media">
@@ -156,6 +157,24 @@
 				        </table>
 				   </div>
 			   </div>
+			   </c:when>
+			   <c:otherwise>
+		        <table>
+		       		<tr height="10px">
+		            </tr>
+		            <tr>
+		                <td align="center"><h2>This event is not available now!</h2></td>
+		            </tr>
+		            <tr height="10px">
+		            </tr>
+		            <tr>
+		            	<td align="center"><h3>Have a look at other events!</h3></td>
+		            </tr>
+		            <tr height="30px">
+		            </tr>	
+	            </table>		   
+		        </c:otherwise>
+			  </c:choose>
 		    </div>
 		</div>
 	</div>

@@ -29,4 +29,9 @@ public class LoggerServiceImpl implements LoggerService {
 		return voList;
 	}
 
+	@Override
+	@Transactional
+	public void addLog(Logger logger) {
+		loggerDao.saveLog(logger);
+	}
 }

@@ -105,3 +105,8 @@ body {
 	width: 200px;
 	align:"center";
 }
+
+/* Event by Category */
+.event-detail {
+	font-weight: bold;
+}

@@ -28,13 +28,20 @@ public class DateTimeUtil {
 	}
 
 	public static Date toDate(String dateString) {
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		SimpleDateFormat formatter2 = new SimpleDateFormat("yyyy-MM-dd");
+	
 		try {
-			return formatter.parse(dateString);
+			if (dateString.contains(":")) {
+				return formatter1.parse(dateString);
+			} else {
+				return formatter2.parse(dateString);
+			}
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		return null;
 	}
 }

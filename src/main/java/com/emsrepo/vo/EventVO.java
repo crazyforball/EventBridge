@@ -23,7 +23,6 @@ public class EventVO implements Serializable {
 	private String category;
 	// private Category category;
 	private User creator;
-//	private String creator;
 	private String createDate;
 
 	public int getEid() {
@@ -121,13 +120,6 @@ public class EventVO implements Serializable {
 	public void setCreator(User creator) {
 		this.creator = creator;
 	}
-//	public String getCreator() {
-//		return creator;
-//	}
-//
-//	public void setCreator(String creator) {
-//		this.creator = creator;
-//	}
 	
 
 	public String getCreateDate() {
@@ -136,6 +128,12 @@ public class EventVO implements Serializable {
 
 	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "eventName: " + eventName;
 	}
 
 }

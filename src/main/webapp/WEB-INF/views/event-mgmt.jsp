@@ -30,7 +30,9 @@
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
+                	<li><a class="dropdown-item" href="./">Event Bridge Home</a></li>
                 	<li><a class="dropdown-item" href="<fmt:message key="nav_dropdown_my_account.path"/>">My Account Home</a></li>
+                	<li><a class="dropdown-item" href="<fmt:message key="nav_dropdown_logout.path"/>">Log out</a></li>
                 </ul>
             </li>
             <li class="dropdown">
