@@ -13,6 +13,7 @@ import com.emsrepo.domain.Logger;
 import com.emsrepo.service.LoggerService;
 
 @Service("loggerService")
+@Transactional
 public class LoggerServiceImpl implements LoggerService {
 
 	@Autowired

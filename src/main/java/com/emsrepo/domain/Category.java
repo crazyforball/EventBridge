@@ -23,8 +23,8 @@ public class Category implements Serializable {
 	}
 
 	@Id
-	// @GeneratedValue(strategy = GenerationType.AUTO)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cid")
 	private Integer cid;
 

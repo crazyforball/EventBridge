@@ -5,9 +5,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Expression;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -20,7 +20,56 @@ public class CategoryDaoImpl implements CategoryDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
+	
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
 
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+	
+	@Override
+	public void saveCategory(Category category) {
+		sessionFactory.getCurrentSession().save(category);
+	}
+	
+	@Override
+	public Category getCategory(String categoryName) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Category.class);
+		criteria.add(Expression.like("categoryName", categoryName));
+		return (Category) criteria.uniqueResult();
+	}
+	
+	@Override
+	public Category getCategory(int cid) {
+		return (Category) sessionFactory.getCurrentSession().get(Category.class, cid);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<String> getCategoryNames() {
+		List<Category> list = (List<Category>) sessionFactory.getCurrentSession().createCriteria(Category.class).list();
+		List<String> categoryNames = new ArrayList<String>();
+		for (Iterator<Category> iterator = list.iterator(); iterator.hasNext();) {
+			categoryNames.add(iterator.next().getCategoryName());
+		}
+		return categoryNames;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Category> getCategoryList() {
+		return (List<Category>) sessionFactory.getCurrentSession().createCriteria(Category.class)
+				.addOrder(Order.asc("categoryName")).list();
+	}
+	
+	@Override
+	public void deleteCategory(Category category) {
+		sessionFactory.getCurrentSession().delete((Object) category);
+	}
+
+	/*
 	public Session getSession() {
 		return this.sessionFactory.openSession();
 	}
@@ -133,5 +182,6 @@ public class CategoryDaoImpl implements CategoryDao {
 			session.close();
 		}
 	}
+	 */
 	
 }
