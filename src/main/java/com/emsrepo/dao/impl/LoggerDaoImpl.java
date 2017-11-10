@@ -1,10 +1,7 @@
 package com.emsrepo.dao.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,6 +15,34 @@ public class LoggerDaoImpl implements LoggerDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Logger> getAllLoggerList() {
+		// TODO Auto-generated method stub
+		return (List<Logger>) sessionFactory.getCurrentSession().createCriteria(Logger.class).list();
+	}
+
+	@Override
+	public void addLog(Logger log) {
+		// TODO Auto-generated method stub
+		sessionFactory.getCurrentSession().persist(log);;
+	}
+
+	@Override
+	public void saveLog(Logger log) {
+		// TODO Auto-generated method stub
+		sessionFactory.getCurrentSession().save(log);
+	}
+
+	/*
 	public Session getSession() {
 		return this.sessionFactory.openSession();
 	}
@@ -75,5 +100,6 @@ public class LoggerDaoImpl implements LoggerDao {
 			}
 		}
 	}
+	*/
 
 }

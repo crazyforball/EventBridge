@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.emsrepo.dao.CommentDao;
 import com.emsrepo.domain.Comment;
@@ -14,6 +15,7 @@ import com.emsrepo.domain.User;
 import com.emsrepo.service.CommentService;
 
 @Service("commentService")
+@Transactional
 public class CommentServiceImpl implements CommentService {
 
 	@Autowired

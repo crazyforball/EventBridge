@@ -1,6 +1,5 @@
 package com.emsrepo.dao.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.CacheMode;
@@ -24,7 +23,108 @@ public class EventDaoImpl implements EventDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
+	
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
 
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Event> getAllEventList() {
+		// TODO Auto-generated method stub
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Event.class);
+		return (List<Event>) criteria.list();
+	}
+
+	@Override
+	public void batchUpdateEventStatus(List<Integer> eidList, String status) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+
+		ScrollableResults events = session.createCriteria(Event.class).setCacheMode(CacheMode.IGNORE)
+				.scroll(ScrollMode.FORWARD_ONLY);
+
+		int count = 0;
+		while (events.next()) {
+			Event e = (Event) events.get(0);
+			if (eidList.contains(e.getEid()))
+				e.setStatus(status);
+			if (++count % 20 == 0) {
+				session.flush();
+				session.clear();
+			}
+		}
+		tx.commit();
+	}
+
+	@Override
+	public void saveEvent(Event event) {
+		// TODO Auto-generated method stub
+		sessionFactory.getCurrentSession().save(event);
+	}
+
+	@Override
+	public Event getEvent(int eid) {
+		// TODO Auto-generated method stub
+		return (Event) sessionFactory.getCurrentSession().get(Event.class, eid);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Event> getEventsByCategory(String category) {
+		// TODO Auto-generated method stub
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Event.class);
+		criteria.add(Expression.like("category", category)).addOrder(Order.desc("createDate"));
+		return (List<Event>) criteria.list();
+		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Event> getLatestNEvents(int n) {
+		// TODO Auto-generated method stub
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Event.class);
+		criteria.addOrder(Order.desc("createDate")).setMaxResults(n);
+		return (List<Event>) criteria.list();
+	}
+
+	@Override
+	public void deleteEvent(Event event) {
+		// TODO Auto-generated method stub
+		sessionFactory.getCurrentSession().delete((Object) event);
+	}
+
+	@Override
+	public void updateEvent(Event oldEvent, Event newEvent) {
+		// TODO Auto-generated method stub
+		if (newEvent.getImageUrl() == null && newEvent.getAudioUrl() == null) {
+			oldEvent.setEventName(newEvent.getEventName());
+			oldEvent.setLocation(newEvent.getLocation());
+			oldEvent.setStartDate(newEvent.getStartDate());
+			oldEvent.setEndDate(newEvent.getEndDate());
+			oldEvent.setCapacity(newEvent.getCapacity());
+			oldEvent.setFees(newEvent.getFees());
+			oldEvent.setCategory(newEvent.getCategory());
+			oldEvent.setDescription(newEvent.getDescription());
+		} else {
+			if (newEvent.getImageUrl() != null) {
+				oldEvent.setImageUrl(newEvent.getImageUrl());
+			}
+			if (newEvent.getAudioUrl() != null) {
+				oldEvent.setAudioUrl(newEvent.getAudioUrl());
+			}
+		}
+		
+		sessionFactory.getCurrentSession().update(oldEvent);
+	}
+
+	
+	/*
 	public Session getSession() {
 		return this.sessionFactory.openSession();
 	}
@@ -198,5 +298,6 @@ public class EventDaoImpl implements EventDao {
 			session.close();
 		}
 	}
+	*/
 
 }

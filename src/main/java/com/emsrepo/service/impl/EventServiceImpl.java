@@ -19,6 +19,7 @@ import com.emsrepo.utils.DateTimeUtil;
 import com.emsrepo.vo.EventVO;
 
 @Service("eventService")
+@Transactional
 public class EventServiceImpl implements EventService {
 
 	@Autowired

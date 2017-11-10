@@ -11,6 +11,7 @@ import com.emsrepo.domain.Category;
 import com.emsrepo.service.CategoryService;
 
 @Service("categoryService")
+@Transactional
 public class CategoryServiceImpl implements CategoryService {
 
 	@Autowired

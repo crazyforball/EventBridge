@@ -1,10 +1,8 @@
 package com.emsrepo.dao.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Expression;
 import org.hibernate.criterion.Order;
@@ -22,7 +20,71 @@ public class CommentDaoImpl implements CommentDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
+	
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
 
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+
+	@Override
+	public void saveComment(Comment comment) {
+		// TODO Auto-generated method stub
+		sessionFactory.getCurrentSession().save(comment);
+		
+	}
+
+	@Override
+	public Comment getComment(User creator, Event event) {
+		// TODO Auto-generated method stub
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Comment.class);
+		criteria.add(Expression.like("creator", creator)).add(Expression.like("event", event));
+		return (Comment) criteria.uniqueResult();
+
+	}
+
+	@Override
+	public Comment getComment(int commentId) {
+		// TODO Auto-generated method stub
+		return (Comment) sessionFactory.getCurrentSession().get(Comment.class, commentId);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Comment> getComments(User creator) {
+		// TODO Auto-generated method stub
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Comment.class);
+		criteria.add(Expression.like("creator", creator)).addOrder(Order.desc("commentDate"));
+		return (List<Comment>) criteria.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Comment> getComments(Event event) {
+		// TODO Auto-generated method stub
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Comment.class);
+		criteria.add(Expression.like("event", event)).addOrder(Order.desc("commentDate"));
+		return (List<Comment>) criteria.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Comment> getLatestNComments(Event event, int n) {
+		// TODO Auto-generated method stub
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Comment.class);
+		criteria.add(Expression.like("event", event)).addOrder(Order.desc("commentDate")).setMaxResults(n);
+		return (List<Comment>) criteria.list();
+	}
+
+	@Override
+	public void deleteComment(Comment comment) {
+		// TODO Auto-generated method stub
+		sessionFactory.getCurrentSession().delete((Object) comment);
+	}
+
+	/*
 	public Session getSession() {
 		return this.sessionFactory.openSession();
 	}
@@ -149,5 +211,6 @@ public class CommentDaoImpl implements CommentDao {
 			session.close();
 		}
 	}
+	*/
 
 }

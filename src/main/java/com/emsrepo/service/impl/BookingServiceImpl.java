@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.emsrepo.dao.BookingDao;
 import com.emsrepo.domain.Booking;
@@ -12,6 +13,7 @@ import com.emsrepo.domain.User;
 import com.emsrepo.service.BookingService;
 
 @Service("bookingService")
+@Transactional
 public class BookingServiceImpl implements BookingService {
 
 	@Autowired

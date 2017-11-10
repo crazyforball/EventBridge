@@ -1,10 +1,8 @@
 package com.emsrepo.dao.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Expression;
 import org.hibernate.criterion.Order;
@@ -22,7 +20,46 @@ public class BookingDaoImpl implements BookingDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
+	
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
 
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+
+	@Override
+	public void saveBooking(Booking booking) {
+		sessionFactory.getCurrentSession().save(booking);
+	}
+
+	@Override
+	public Booking getBooking(User creator, Event event) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Booking.class);
+		criteria.add(Expression.like("creator", creator)).add(Expression.like("event", event));
+		return (Booking) criteria.uniqueResult();
+	}
+
+	@Override
+	public Booking getBooking(int bid) {
+		return (Booking) sessionFactory.getCurrentSession().get(Booking.class, bid);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Booking> getBookings(User creator) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Booking.class);
+		criteria.add(Expression.like("creator", creator)).addOrder(Order.desc("bookingDate"));
+		return (List<Booking>) criteria.list();
+	}
+
+	@Override
+	public void deleteBooking(Booking booking) {
+		sessionFactory.getCurrentSession().delete((Object) booking);
+	}
+
+	/*
 	public Session getSession() {
 		return this.sessionFactory.openSession();
 	}
@@ -78,6 +115,7 @@ public class BookingDaoImpl implements BookingDao {
 	}
 
 	@SuppressWarnings("unchecked")
+
 	@Override
 	public List<Booking> getBookings(User creator) {
 		Session session = null;
@@ -110,5 +148,6 @@ public class BookingDaoImpl implements BookingDao {
 			session.close();
 		}
 	}
+	*/
 
 }
